@@ -1,0 +1,146 @@
+<template>
+      <div class="container">
+            <Header title="更改电话号" class="header">
+                  <router-link to="/personalData" slot="left">
+                        <mt-button icon="back"></mt-button>
+                  </router-link>
+            </Header>
+            <div class="changeName-Box">
+                  <div class="cell-box">
+                        <div class="cell">
+                              <span class="phone-icon"></span>
+                              <select name="" id="" class="myselect">
+                                    <option value ="volvo">+86</option>
+                                    <option value ="saab"></option>
+                                    <option value="opel"></option>
+                                    <option value="audi"></option>     
+                              </select>
+                              <img src="./../../../assets/imgs/arrow.png" alt="" class="myarrow">
+                              <Field v-model="userName.lastName"
+                                     clearable 
+                                     ref="input"
+                                     type="tel"
+                                     placeholder="输入手机号码"
+                                     :error-message="errorMessage.lastMessage"
+                              />
+                        </div>
+                              
+                              <Field v-model="userName.firstName"
+                                     clearable
+                                     placeholder="输入验证码"
+                                     class="cell"
+                                     type="number"
+                                     :left-icon="imgURL"
+                                     :error-message="errorMessage.firstMessage"
+                              >
+                                    <Button slot="button" size="small" type="primary" class="mybutton">获取验证码</Button>
+                              </Field>
+                        
+                        
+                  </div>
+                  <div class="button-box">
+                        <Button round size="large" class="my-button">确定</Button>
+                  </div>
+            </div>
+      </div>
+</template>
+<style>
+.changeName-Box{
+      width: 100%;
+      height: 100%;
+      padding-top: 40px;
+}
+.cell-box{
+      padding: 30px;
+}
+.cell{
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      padding-left: 15px;
+}
+.cell .mybutton{
+      border: none;
+      border-left: 1px solid #ccc;
+      background-color: transparent;
+      color: #666;
+}
+.button-box{
+      width: 100%;
+      padding: 0 30px;
+      left: 0;
+      right: 0;
+      height: 80px;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+}
+.my-button{
+      background-color: #008e98;
+      color: #fff;
+}
+.cell .phone-icon{
+      width: 22px;
+      height: 22px;
+      display: block;
+      background: url("./../../../assets/imgs/phone-icon.png") center no-repeat;
+      background-size: 16px 22px;
+}
+.cell i{
+      font-size: 18px !important;
+}
+.cell input{
+      background-color: transparent !important;
+}
+.myselect{
+      border:none;
+      outline: none;
+      appearance: none;  
+      -moz-appearance: none;  
+      -webkit-appearance: none; 
+      margin-left: 5px;
+      padding-right: 10px;
+      background-color: transparent;
+}
+.myarrow{
+      width: 10px;
+      height: 5px;
+      
+}
+</style>
+<script>
+import { Header } from 'mint-ui';
+import { Button,Field } from 'vant';
+import 'vant/lib/button/style';
+import 'vant/lib/field/style';
+import imgURL from './../../../assets/imgs/code.png'
+export default {
+      components: {
+            Header,
+            Button,
+            Field
+      },
+      data(){
+            return{
+                  imgURL,
+                  //TODO 修改 手机号与验证码变量名
+                  userName:{
+                        lastName:"",
+                        firstName:""
+                  },
+                  errorMessage:{
+                        lastMessage:"",
+                        firstMessage:"",
+                  }
+            }
+      },
+      methods:{
+            
+      },
+      mounted() {
+            this.$nextTick(()=>{
+                  this.$refs['input'].focus()
+            })
+      }
+}
+</script>
