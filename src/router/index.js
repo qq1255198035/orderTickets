@@ -9,6 +9,16 @@ import personalData from "./../pages/myhome/children/personalData";
 import userImg from "./../pages/myhome/children/userImg";
 import changeName from "./../pages/myhome/children/changeName";
 import changeNumber from "./../pages/myhome/children/changeNumber";
+import changeSex from "./../pages/myhome/children/changeSex";
+import login from "./../pages/login/login";
+import register from "./../pages/register/register";
+import resetPword1 from "./../pages/resetPword/resetPword1";
+import resetPword2 from "./../pages/resetPword/resetPword2";
+import details1 from "./../pages/details/details1";
+import details2 from "./../pages/details/details2";
+import buy from "./../pages/details/buy"
+import pay from "./../pages/pay/pay"
+import coupon from "./../pages/coupon/coupon"
 export default new VueRouter({
       //name 路由名称 判断Tab栏active  $route.name == ?
       routes:[
@@ -79,6 +89,86 @@ export default new VueRouter({
                   meta: {
                         keepAlive: false
                   }
-            }
+            },
+            {
+                  path: '/changeSex',
+                  name: 'changeSex',
+                  component: changeSex,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/login',
+                  name: 'login',
+                  component: login,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/register',
+                  name: 'register',
+                  component: register,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/resetPword1',
+                  name: 'resetPword1',
+                  component: resetPword1,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/resetPword2',
+                  name: 'resetPword2',
+                  component: resetPword2,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/details1',
+                  name: 'details1',
+                  component: details1,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/details2',
+                  name: 'details2',
+                  component: details2,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/buy',
+                  name: 'buy',
+                  component: buy,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/pay',
+                  name: 'pay',
+                  component: pay,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/coupon',
+                  name: 'coupon',
+                  component: coupon,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
       ]
 })

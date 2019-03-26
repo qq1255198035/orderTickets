@@ -18,7 +18,7 @@
                   <mt-cell title="电话号码" :value="userInfo.userTel" class="cell" to="/changeNumber" is-link>
                         
                   </mt-cell>
-                  <mt-cell title="性别" :value="userInfo.userSex" class="cell" to="/personalData" is-link>
+                  <mt-cell title="性别" :value="userInfo.userSex" class="cell" to="/changeSex" is-link>
                         
                   </mt-cell>
             </div>
@@ -35,6 +35,7 @@
 .mint-cell-title img.right{
       float: right;
 }
+
 </style>
 <script>
 import { Header, Cell } from 'mint-ui';

@@ -22,7 +22,7 @@
             <tabbar></tabbar>
       </div>
 </template>
-<style scoped>
+<style>
 .main{
       width: 100%;
       height: 100%;
@@ -57,6 +57,9 @@
 }
 .cell{
       border-bottom: 1px solid #ccc;
+}
+.mint-cell-wrapper{
+      background-image: none !important;
 }
 </style>
 <script>

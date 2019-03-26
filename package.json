@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "better-scroll": "^1.15.0",
     "fastclick": "^1.0.6",
     "mint-ui": "^2.2.13",
     "vant": "^1.6.10",
