@@ -6,80 +6,85 @@
                   </router-link>
             </Header>
             <div class="main">
-                 <Tabs v-model="active" sticky :line-width="80" title-active-color="#008e98" color="#008e98" title-inactive-color="#666" v-if="orderInfo.length > 0">
-                        <Tab title="全部订单">
-                              <div class="orderItem" v-for="(item,index) in orderInfo" :key="index">
-                                    <div class="tab-box">
-                                          <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
-                                          <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
-                                    </div>
-                                    <Card
-                                          :num="item.num"
-                                          :price="item.price"
-                                          :desc="item.desc"  
-                                          :title="item.orderTitle"
-                                          :thumb="item.imgUrl"
-                                    >
-                                          <div slot="footer">
-                                                <Button size="small" round plain v-if="item.orderStatus == 1">查看劵码</Button>
-                                                <Button size="small" round plain v-if="item.orderStatus == 0">查看详情</Button>
-                                                <Button size="small" round plain v-if="item.orderStatus == 0">去付款</Button>
-                                    
+                  <div class="wrapper main-wrapper">
+                        <div class="content">
+                              <Tabs v-model="active" :line-width="80" title-active-color="#008e98" color="#008e98" title-inactive-color="#666" v-if="orderInfo.length > 0">
+                                    <Tab title="全部订单" >
+                                          <div class="orderItem" v-for="(item,index) in orderInfo" :key="index">
+                                                <div class="tab-box">
+                                                      <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
+                                                      <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
+                                                </div>
+                                                <Card
+                                                      :num="item.num"
+                                                      :price="item.price"
+                                                      :desc="item.desc"  
+                                                      :title="item.orderTitle"
+                                                      :thumb="item.imgUrl"
+                                                >
+                                                      <div slot="footer">
+                                                            <Button size="small" round plain v-if="item.orderStatus == 1">查看劵码</Button>
+                                                            <Button size="small" round plain v-if="item.orderStatus == 0">查看详情</Button>
+                                                            <Button size="small" round plain v-if="item.orderStatus == 0">去付款</Button>
+                                                      </div>
+                                                </Card>
                                           </div>
-                                    </Card>
-                              </div>
-                        </Tab>
-                        <Tab title="待付款">
-                              <div class="orderItem" v-for="(item,index) in orderStatusFilter0" :key="index">
-                                    <div class="tab-box">
-                                          <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
-                                          <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
-                                    </div>
-                                    <Card
-                                          :num="item.num"
-                                          :price="item.price"
-                                          :desc="item.desc"  
-                                          :title="item.orderTitle"
-                                          :thumb="item.imgUrl"
-                                    >
-                                          <div slot="footer">
-                                                <Button size="small" round plain v-if="item.orderStatus == 1">查看劵码</Button>
-                                                <Button size="small" round plain v-if="item.orderStatus == 0">查看详情</Button>
-                                                <Button size="small" round plain v-if="item.orderStatus == 0">去付款</Button>
+                                   
+                                    </Tab>
+                                    <Tab title="待付款">
+                                          <div class="orderItem" v-for="(item,index) in orderStatusFilter0" :key="index">
+                                                <div class="tab-box">
+                                                      <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
+                                                      <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
+                                                </div>
+                                                <Card
+                                                      :num="item.num"
+                                                      :price="item.price"
+                                                      :desc="item.desc"  
+                                                      :title="item.orderTitle"
+                                                      :thumb="item.imgUrl"
+                                                >
+                                                      <div slot="footer">
+                                                            <Button size="small" round plain v-if="item.orderStatus == 1">查看劵码</Button>
+                                                            <Button size="small" round plain v-if="item.orderStatus == 0">查看详情</Button>
+                                                            <Button size="small" round plain v-if="item.orderStatus == 0">去付款</Button>
                                     
+                                                      </div>
+                                                </Card>
                                           </div>
-                                    </Card>
-                              </div>
-                        </Tab>
-                        <Tab title="可使用">
-                              <div class="orderItem" v-for="(item,index) in orderStatusFilter1" :key="index">
-                                    <div class="tab-box">
-                                          <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
-                                          <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
-                                    </div>
-                                    <Card
-                                          :num="item.num"
-                                          :price="item.price"
-                                          :desc="item.desc"  
-                                          :title="item.orderTitle"
-                                          :thumb="item.imgUrl"
-                                    >
-                                          <div slot="footer">
-                                                <Button size="small" round plain v-if="item.orderStatus == 1">查看劵码</Button>
-                                                <Button size="small" round plain v-if="item.orderStatus == 0">查看详情</Button>
-                                                <Button size="small" round plain v-if="item.orderStatus == 0">去付款</Button>
                                     
+                              
+                              
+                                    </Tab>
+                                    <Tab title="可使用">
+                                          <div class="orderItem" v-for="(item,index) in orderStatusFilter1" :key="index">
+                                                <div class="tab-box">
+                                                      <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
+                                                      <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
+                                                </div>
+                                                <Card
+                                                      :num="item.num"
+                                                      :price="item.price"
+                                                      :desc="item.desc"  
+                                                      :title="item.orderTitle"
+                                                      :thumb="item.imgUrl"
+                                                >
+                                                      <div slot="footer">
+                                                            <Button size="small" round plain v-if="item.orderStatus == 1">查看劵码</Button>
+                                                            <Button size="small" round plain v-if="item.orderStatus == 0">查看详情</Button>
+                                                            <Button size="small" round plain v-if="item.orderStatus == 0">去付款</Button>
+                                    
+                                                      </div>
+                                                </Card>
                                           </div>
-                                    </Card>
-                              </div>
-                        </Tab>
-                  </Tabs>
+                                    </Tab>
+                              </Tabs>
+                        </div>
+                  </div>
                   <div class="orderEmpty" v-if="orderInfo.length == 0">
                         <img src="./../../../assets/imgs/orderEmpty.png" alt="">
                   </div>
-                  
             </div>
-            
       </div>
 </template>
 <style scoped>
@@ -87,6 +92,11 @@
             width:100%;
             padding-top: 40px;
             height:100%;
+      }
+      .main-wrapper{
+            height: 550px;
+            overflow: hidden;
+            padding: 0 10px;
       }
       .orderItem{
             position: relative;
@@ -102,24 +112,25 @@
             z-index: 10;
       }
       .orderEmpty{
-      width: 100%;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      height: 100%;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-}
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            height: 100%;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+      }
 .orderEmpty img{
       width: 40%;
       display: block;
 }
 </style>
 <script>
+import BScroll from 'better-scroll'
 import {Header} from 'mint-ui';
 import { Tab, Tabs, Button, Card, Tag} from 'vant';
 import 'vant/lib/tab/style'
@@ -180,6 +191,54 @@ export default {
                               num:5,
                               price:200,
                               imgUrl:imgUrl
+                        },
+                         {     
+                              orderStatus:1,
+                              orderTitle:"篮球比赛",
+                              desc:"有效日期：2019.3.30",
+                              num:4,
+                              price:200,
+                              imgUrl:imgUrl
+                        },
+                        {     
+                              orderStatus:0,
+                              orderTitle:"篮球比赛",
+                              desc:"有效日期：2019.3.30",
+                              num:5,
+                              price:200,
+                              imgUrl:imgUrl
+                        },
+                         {     
+                              orderStatus:1,
+                              orderTitle:"篮球比赛",
+                              desc:"有效日期：2019.3.30",
+                              num:4,
+                              price:200,
+                              imgUrl:imgUrl
+                        },
+                        {     
+                              orderStatus:0,
+                              orderTitle:"篮球比赛",
+                              desc:"有效日期：2019.3.30",
+                              num:5,
+                              price:200,
+                              imgUrl:imgUrl
+                        },
+                         {     
+                              orderStatus:1,
+                              orderTitle:"篮球比赛",
+                              desc:"有效日期：2019.3.30",
+                              num:4,
+                              price:200,
+                              imgUrl:imgUrl
+                        },
+                        {     
+                              orderStatus:0,
+                              orderTitle:"篮球比赛",
+                              desc:"有效日期：2019.3.30",
+                              num:5,
+                              price:200,
+                              imgUrl:imgUrl
                         }
                   ]
             }
@@ -200,7 +259,13 @@ export default {
             }
       },
       mounted(){
-            
-      }
+            this.$nextTick(()=>{
+                  let wrapper = document.querySelector('.wrapper');
+                  let scroll = new BScroll('.wrapper',{
+                        scrollY: true,
+                        click: true
+                  })   
+            })
+      },
 }
 </script>

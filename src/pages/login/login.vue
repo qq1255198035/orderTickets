@@ -108,6 +108,7 @@
 }
 .login-box .bottom p{
       color: #fff;
+      margin-top: 20px;
 }
 </style>
 <script>

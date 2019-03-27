@@ -1,6 +1,6 @@
 <template>
       <div class="container">
-            <theme :title="gameDetails.title" :desc="gameDetails.desc" :place="gameDetails.place" :time="gameDetails.time" :person="gameDetails.person"></theme>
+            <theme :Htitle="Htitle" :title="gameDetails.title" :desc="gameDetails.desc" :place="gameDetails.place" :time="gameDetails.time" :person="gameDetails.person"></theme>
             <div class="game-desc wrapper">
                   <p class="desc-text content">{{gameDetails.message}}</p>
             </div>
@@ -90,6 +90,7 @@ export default {
       },
       data(){
             return{
+                  Htitle:"赛事详情",
                   gameDetails:{
                         title:"篮球比赛",
                         desc:"Basketball match",
@@ -127,6 +128,7 @@ export default {
                   let wrapper = document.querySelector('.wrapper');
                   let scroll = new BScroll('.wrapper',{
                         scrollY: true,
+                        click:true
                   })
                   let wrapper1 = document.querySelector('.wrapper1');
                   let content1 = document.querySelector('.content1');
@@ -135,6 +137,7 @@ export default {
                   content1.style.width = children[0].offsetWidth * length + 'px';
                   let scroll1 = new BScroll('.wrapper1',{
                         scrollX: true,
+                        click:true
                   })
             })
       },

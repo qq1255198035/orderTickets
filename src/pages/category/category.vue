@@ -12,7 +12,9 @@
                   
             </Header>
             <div class="goodsList" v-if="goods.length > 0">
-                  <Checkbox-group v-model="checkedGoods">
+                  <div class="wrapper wrapper-box">
+                        <div class="content">
+                               <Checkbox-group v-model="checkedGoods">
                         <Checkbox v-for="(item, index) in goods" :key="index" :name="item.id" checked-color="#008e98" class="checkbox">
                               <Card :num="item.num" :price="item.price" :desc="item.desc" :title="item.title" :thumb="item.thumb" class="cardItem" :tag="item.tag"> 
                                     
@@ -24,6 +26,9 @@
                               </transition>
                         </Checkbox>
                   </Checkbox-group>
+                        </div>
+                  </div>
+                 
                   <div class="submit-box">
                         <div class="submit">
                               <Checkbox v-model="allChecked" checked-color="#008e98" class="submit-left">
@@ -49,6 +54,7 @@
       padding: 40px 0 140px;
       background-color: #fff
 }
+
 .cardItem{
       width: 100%;
 }
@@ -97,8 +103,8 @@
 }
 .stepper{
       position: absolute;
-      bottom: 0;
-      right: 10px;
+      bottom: 10px;
+      right: 24px;
 }
 .stepper button,input{
       color: #000 !important;
@@ -138,6 +144,7 @@
 }
 </style>
 <script>
+
 import { Header, MessageBox} from 'mint-ui';
 import tabbar from './../../components/tabBar'
 import { Card, Checkbox, CheckboxGroup, Button, Stepper} from 'vant';

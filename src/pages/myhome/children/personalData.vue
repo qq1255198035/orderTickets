@@ -29,8 +29,7 @@
       padding: 40px 10px;
 }
 .cell{
-      border-bottom: 1px solid #ccc;
-      
+      border-bottom: 1px solid #ccc
 }
 .mint-cell-title img.right{
       float: right;

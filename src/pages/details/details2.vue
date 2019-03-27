@@ -1,6 +1,6 @@
 <template>
       <div class="container">
-            <theme :title="gameDetails.title" :desc="gameDetails.desc" :place="gameDetails.place" :time="gameDetails.time" :person="gameDetails.person"></theme>
+            <theme :Htitle="Htitle" :title="gameDetails.title" :desc="gameDetails.desc" :place="gameDetails.place" :time="gameDetails.time" :person="gameDetails.person"></theme>
             <CellGroup>
                   <Cell class="my-cell activities">
                         <template slot="title">
@@ -93,6 +93,7 @@ export default {
       },
       data(){
             return{
+                  Htitle:"赛事详情",
                   gameDetails:{
                         title:"篮球比赛",
                         desc:"Basketball match",

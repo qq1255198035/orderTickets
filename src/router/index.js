@@ -19,6 +19,7 @@ import details2 from "./../pages/details/details2";
 import buy from "./../pages/details/buy"
 import pay from "./../pages/pay/pay"
 import coupon from "./../pages/coupon/coupon"
+import orderDetails from "./../pages/orderDetails/orderDetails";
 export default new VueRouter({
       //name 路由名称 判断Tab栏active  $route.name == ?
       routes:[
@@ -166,6 +167,14 @@ export default new VueRouter({
                   path: '/coupon',
                   name: 'coupon',
                   component: coupon,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/orderDetails',
+                  name: 'orderDetails',
+                  component: orderDetails,
                   meta: {
                         keepAlive: false
                   }

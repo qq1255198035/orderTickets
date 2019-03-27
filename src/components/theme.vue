@@ -1,6 +1,6 @@
 <template>
       <div class="theme-box">
-            <Header title="赛事详情" class="header" :fixed="true">
+            <Header :title="Htitle" class="header" :fixed="true">
                   <mt-button icon="back" slot="left" @click.native="$router.back(-1)"></mt-button>
                   <mt-button slot="right" @click.native="$router.push('/category')">
                         <img src="./../assets/imgs/goBuy.png" height="20" width="20" slot="icon">
@@ -71,6 +71,6 @@ export default {
             Header,
             Button
       },
-      props:["title","desc","place","time","person"]
+      props:["title","desc","place","time","person","Htitle"]
 }
 </script>
