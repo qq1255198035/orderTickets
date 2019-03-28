@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import index from "./../pages/index/index";
 import category from "./../pages/category/category";
-import myhome from "./../pages/myhome/myhome";
+import myhome from "./../pages/myhome/index/myhome";
 import order from "./../pages/myhome/children/order";
 import personalData from "./../pages/myhome/children/personalData";
 import userImg from "./../pages/myhome/children/userImg";
@@ -12,14 +12,14 @@ import changeNumber from "./../pages/myhome/children/changeNumber";
 import changeSex from "./../pages/myhome/children/changeSex";
 import login from "./../pages/login/login";
 import register from "./../pages/register/register";
-import resetPword1 from "./../pages/resetPword/resetPword1";
-import resetPword2 from "./../pages/resetPword/resetPword2";
+import resetPword from "./../pages/resetPword/resetPword";
 import details1 from "./../pages/details/details1";
 import details2 from "./../pages/details/details2";
-import buy from "./../pages/details/buy"
+import buy from "./../pages/buy/buy"
 import pay from "./../pages/pay/pay"
 import coupon from "./../pages/coupon/coupon"
 import orderDetails from "./../pages/orderDetails/orderDetails";
+import payresult from "./../pages/payresult/payresult"
 export default new VueRouter({
       //name 路由名称 判断Tab栏active  $route.name == ?
       routes:[
@@ -116,17 +116,9 @@ export default new VueRouter({
                   }
             },
             {
-                  path: '/resetPword1',
-                  name: 'resetPword1',
-                  component: resetPword1,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/resetPword2',
-                  name: 'resetPword2',
-                  component: resetPword2,
+                  path: '/resetPword',
+                  name: 'resetPword',
+                  component: resetPword,
                   meta: {
                         keepAlive: false
                   }
@@ -175,6 +167,14 @@ export default new VueRouter({
                   path: '/orderDetails',
                   name: 'orderDetails',
                   component: orderDetails,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/payresult',
+                  name: 'payresult',
+                  component: payresult,
                   meta: {
                         keepAlive: false
                   }

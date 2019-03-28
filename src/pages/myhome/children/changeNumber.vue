@@ -16,24 +16,22 @@
                                     <option value="audi"></option>     
                               </select>
                               <img src="./../../../assets/imgs/arrow.png" alt="" class="myarrow">
-                              <Field v-model="userName.lastName"
+                              <Field v-model="phoneNum"
                                      clearable 
                                      ref="input"
                                      type="tel"
                                      placeholder="输入手机号码"
-                                     :error-message="errorMessage.lastMessage"
                               />
                         </div>
                               
-                              <Field v-model="userName.firstName"
+                              <Field v-model="code"
                                      clearable
                                      placeholder="输入验证码"
                                      class="cell"
                                      type="number"
                                      :left-icon="imgURL"
-                                     :error-message="errorMessage.firstMessage"
                               >
-                                    <Button slot="button" size="small" type="primary" class="mybutton">获取验证码</Button>
+                                    <Button slot="button" size="small" type="primary" class="mybutton" @click="checkMobile(phoneNum)">获取验证码</Button>
                               </Field>
                         
                         
@@ -92,6 +90,9 @@
 .cell input{
       background-color: transparent !important;
 }
+.cell .van-cell{
+      border-bottom: none;
+}
 .myselect{
       border:none;
       outline: none;
@@ -109,7 +110,8 @@
 }
 </style>
 <script>
-import { Header } from 'mint-ui';
+import { Header, MessageBox } from 'mint-ui';
+
 import { Button,Field } from 'vant';
 import 'vant/lib/button/style';
 import 'vant/lib/field/style';
@@ -118,24 +120,26 @@ export default {
       components: {
             Header,
             Button,
-            Field
+            Field,
+            MessageBox
       },
       data(){
             return{
                   imgURL,
                   //TODO 修改 手机号与验证码变量名
-                  userName:{
-                        lastName:"",
-                        firstName:""
-                  },
-                  errorMessage:{
-                        lastMessage:"",
-                        firstMessage:"",
-                  }
+                  phoneNum:"",
+                  code:"",
+                 
             }
       },
       methods:{
-            
+            checkMobile(mobile) {
+                  if (!mobile) {
+                        MessageBox('错误', '请输入手机号码');
+                        return false
+                  }
+                        return true
+            },
       },
       mounted() {
             this.$nextTick(()=>{

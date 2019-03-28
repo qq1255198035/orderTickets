@@ -12,10 +12,10 @@
                   </div>
                   <div class="cellBox">
                         <mt-cell title="全部订单" to="/order" is-link class="cell">
-                              <img slot="icon" src="./../../assets/imgs/orderIcon.png" width="24" height="24">
+                              <img slot="icon" src="./../../../assets/imgs/orderIcon.png" width="24" height="24">
                         </mt-cell>
                         <mt-cell title="个人资料" to="/personalData" is-link class="cell">
-                              <img slot="icon" src="./../../assets/imgs/someOne-icon.png" width="24" height="24">
+                              <img slot="icon" src="./../../../assets/imgs/someOne-icon.png" width="24" height="24">
                         </mt-cell>
                   </div>
             </div>
@@ -31,7 +31,7 @@
 .userCenter{
       width: 100%;
       height: 30%;
-      background: url('./../../assets/imgs/myHome-bg.png') center no-repeat;
+      background: url('./../../../assets/imgs/myHome-bg.png') center no-repeat;
       background-size: cover;
       display: flex;
       flex-direction: column;
@@ -64,8 +64,8 @@
 </style>
 <script>
 import { Header, Cell } from 'mint-ui';
-import tabbar from './../../components/tabBar';
-import userImg from './../../assets/imgs/userImg.png'
+import tabbar from './../../../components/tabBar';
+import userImg from './../../../assets/imgs/userImg.png'
 export default {
   components: {
       Header,

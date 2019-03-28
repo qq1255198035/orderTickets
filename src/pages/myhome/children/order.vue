@@ -87,19 +87,35 @@
             </div>
       </div>
 </template>
-<style scoped>
+<style>
       .main{
             width:100%;
             padding-top: 40px;
             height:100%;
       }
       .main-wrapper{
-            height: 550px;
-            overflow: hidden;
             padding: 0 10px;
       }
       .orderItem{
             position: relative;
+            margin: 10px 0;
+      }
+      .orderItem .van-card{
+            background-color: #fff;
+            padding: 0
+      }
+      .orderItem .van-tag::after{
+            border: none;
+      }
+      .orderItem .van-card__content{
+            padding-top: 20px;
+      }
+      .orderItem .van-card .van-card__header{
+            background-color: #eee;
+      }
+      .orderItem .van-card .van-card__footer{
+            margin-top: 10px;
+            padding-right: 10px;
       }
       .orderItem button{
             border-color: #008e98;
@@ -124,10 +140,14 @@
             -ms-flex-align: center;
             align-items: center;
       }
-.orderEmpty img{
-      width: 40%;
-      display: block;
-}
+      .orderEmpty img{
+            width: 40%;
+            display: block;
+      }
+      .content .van-tabs__wrap{
+            position: fixed;
+            top: 40px;
+      }
 </style>
 <script>
 import BScroll from 'better-scroll'
@@ -260,11 +280,11 @@ export default {
       },
       mounted(){
             this.$nextTick(()=>{
-                  let wrapper = document.querySelector('.wrapper');
-                  let scroll = new BScroll('.wrapper',{
-                        scrollY: true,
-                        click: true
-                  })   
+                  // let wrapper = document.querySelector('.wrapper');
+                  // let scroll = new BScroll('.wrapper',{
+                  //       scrollY: true,
+                  //       click: true
+                  // })   
             })
       },
 }

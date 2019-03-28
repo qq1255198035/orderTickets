@@ -4,7 +4,7 @@
                   <div slot="right" @click="EditIsShow = !EditIsShow">
                         <span v-show="EditIsShow && goods.length > 0">
                               编辑
-                  </span>
+                        </span>
                         <span  v-show="!EditIsShow">
                               完成
                         </span>
@@ -109,11 +109,13 @@
 .stepper button,input{
       color: #000 !important;
       border: 1px solid #ccc;
-      background-color: #eee !important;
+      background-color: #fff !important;
       margin: 2px 0 !important;
 }
 .stepper input{
-      background-color: #e5e5e5 !important;
+      border-top:  1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      height: 24px;
 }
 .fade-enter-active, .fade-leave-active {
 	transition: opacity .2s;
@@ -153,8 +155,6 @@ import 'vant/lib/checkbox/style';
 import 'vant/lib/checkbox-group/style';
 import 'vant/lib/button/style';
 import 'vant/lib/stepper/style'
-
-
 export default {
   components: {
       Header,

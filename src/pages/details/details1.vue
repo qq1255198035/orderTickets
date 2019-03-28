@@ -66,7 +66,7 @@
       padding: 10px 30px;
       right: 0;
       border-top: 1px solid #ccc;
-      background-color: #f1f1f1;
+      background-color: #fff;
       max-width: 750px;
       min-width: 320px;
       width: 100%;

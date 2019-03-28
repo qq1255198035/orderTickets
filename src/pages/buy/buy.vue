@@ -95,6 +95,7 @@
       min-width: 320px;
       width: 100%;
       margin: 0 auto;
+      border-top: 1px solid #ccc;
 }
 .buyBtn-box{
       width: 100%;
@@ -115,6 +116,9 @@
       border-top-left-radius:0;
       border-bottom-left-radius:0;
       border: 1px solid #008e98;
+}
+.van-cell:not(:last-child)::after{
+      border-bottom: none !important;
 }
 </style>
 <script>
