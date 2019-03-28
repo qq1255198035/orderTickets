@@ -17,7 +17,7 @@
                                                 </div>
                                                 <Card
                                                       :num="item.num"
-                                                      :price="item.price"
+                                                      :price="item.price | fomatMoney"
                                                       :desc="item.desc"  
                                                       :title="item.orderTitle"
                                                       :thumb="item.imgUrl"
@@ -39,7 +39,7 @@
                                                 </div>
                                                 <Card
                                                       :num="item.num"
-                                                      :price="item.price"
+                                                      :price="item.price | fomatMoney"
                                                       :desc="item.desc"  
                                                       :title="item.orderTitle"
                                                       :thumb="item.imgUrl"
@@ -64,7 +64,7 @@
                                                 </div>
                                                 <Card
                                                       :num="item.num"
-                                                      :price="item.price"
+                                                      :price="item.price | fomatMoney"
                                                       :desc="item.desc"  
                                                       :title="item.orderTitle"
                                                       :thumb="item.imgUrl"
@@ -73,7 +73,6 @@
                                                             <Button size="small" round plain v-if="item.orderStatus == 1">查看劵码</Button>
                                                             <Button size="small" round plain v-if="item.orderStatus == 0">查看详情</Button>
                                                             <Button size="small" round plain v-if="item.orderStatus == 0">去付款</Button>
-                                    
                                                       </div>
                                                 </Card>
                                           </div>
@@ -147,6 +146,12 @@
       .content .van-tabs__wrap{
             position: fixed;
             top: 40px;
+            max-width: 750px;
+            min-width: 320px;
+            width: 100%;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
       }
 </style>
 <script>
@@ -264,8 +269,10 @@ export default {
             }
       },
       filters:{
-           
-      },
+		fomatMoney(value){
+			return value.toFixed(2);
+		}
+	},
       computed:{
             orderStatusFilter1(){
                   return this.orderInfo.filter(ele =>{
@@ -280,11 +287,7 @@ export default {
       },
       mounted(){
             this.$nextTick(()=>{
-                  // let wrapper = document.querySelector('.wrapper');
-                  // let scroll = new BScroll('.wrapper',{
-                  //       scrollY: true,
-                  //       click: true
-                  // })   
+                 
             })
       },
 }

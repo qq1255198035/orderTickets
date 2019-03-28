@@ -33,7 +33,7 @@
       height: 100%;
       padding-top: 40px;
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
 
 }
@@ -60,6 +60,27 @@
       font-size: 14px;
       color: #aaa;
       margin: 5px 0;
+}
+@media screen and (min-width: 700px) {
+      .goods-img img{
+            width: 100%;
+      }
+      .desc h3{
+            font-size: 30px;
+      
+      }
+      .desc h4{
+            font-size: 28px;
+    
+      }
+      .desc p{
+      font-size: 20px;
+      }
+      .goods-img{
+            width: 220px;
+            height: 272px;
+      }
+
 }
 </style>
 <script>

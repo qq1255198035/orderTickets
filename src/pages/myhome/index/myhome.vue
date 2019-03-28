@@ -12,10 +12,10 @@
                   </div>
                   <div class="cellBox">
                         <mt-cell title="全部订单" to="/order" is-link class="cell">
-                              <img slot="icon" src="./../../../assets/imgs/orderIcon.png" width="24" height="24">
+                              <img slot="icon" src="./../../../assets/imgs/orderIcon.png" width="20" height="24">
                         </mt-cell>
                         <mt-cell title="个人资料" to="/personalData" is-link class="cell">
-                              <img slot="icon" src="./../../../assets/imgs/someOne-icon.png" width="24" height="24">
+                              <img slot="icon" src="./../../../assets/imgs/someOne-icon.png" width="20" height="24">
                         </mt-cell>
                   </div>
             </div>

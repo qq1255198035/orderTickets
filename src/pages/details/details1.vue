@@ -2,7 +2,7 @@
       <div class="container">
             <theme :Htitle="Htitle" :title="gameDetails.title" :desc="gameDetails.desc" :place="gameDetails.place" :time="gameDetails.time" :person="gameDetails.person"></theme>
             <div class="game-desc wrapper">
-                  <p class="desc-text content">{{gameDetails.message}}</p>
+                  <p class="desc-text content" onselectstart="return false">{{gameDetails.message}}</p>
             </div>
             <div class="stars-content">
                   <h3>参赛明星</h3>
@@ -75,6 +75,9 @@
 .buy-button{
       background-color: #008e98;
       color: #fff;
+}
+.desc-text{
+      cursor: default;
 }
 </style>
 <script>
