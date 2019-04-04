@@ -19,7 +19,7 @@
                         <li :class="{'active':actived == 3}" @click="actived = 3"><img src="./../../assets/imgs/pp-pay.png" alt=""></li>
                   </ul>
                   <div class="confirm-buy">
-                        <Button round size="large" class="confirm-btn">确定</Button>
+                        <Button round size="large" class="confirm-btn" to="/payresult">确定</Button>
                   </div>
                   
             </div>
@@ -88,6 +88,11 @@ export default {
             return{
                   actived:1,
             }
-      }
+      },
+      filters:{
+	      fomatMoney(value){
+		      return value.toFixed(2);
+	      }
+      },
 }
 </script>

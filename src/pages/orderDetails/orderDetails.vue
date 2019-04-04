@@ -15,18 +15,18 @@
                                     <Icon slot="right-icon" :name="codeImg" class="custom-icon" @click.stop="ishow = index"/>
                               </Cell>
                         </CellGroup>
-                        <Cell title="温馨提示" title-class="details-local"></Cell>
-                        <Cell :center="true">
+                        <Cell title="温馨提示" title-class="details-local" class="mt"></Cell>
+                        <Cell :center="true" class="border-none">
                               <template slot="title">
                                     <span class="custom-text">赛事时间：{{gameDetails.time}}</span>
                               </template>
                         </Cell>
                   </div>  
             </div>
-            <div class="popup-com" v-for="(item,index) in gameDetails.codeMsg" :key="index" @click="myclick">
+            <div class="popup-com" v-for="(item,index) in gameDetails.codeMsg" :key="index" @click="ishow = -1">
                   
                         <popup :imgURL1="item.imgURL1" :imgURL2="item.imgURL2" :name="item.name" v-if="ishow == index"></popup>
-                  
+                        <span v-if="ishow == index" @click="ishow = -1">x</span>
                   
             </div>
             
@@ -39,8 +39,17 @@
 }
 .order-details{
       width:100%;
-      height: 340px;
+      height: 345px;
       overflow: hidden;
+}
+.mt{
+      margin-top: 15px
+}
+.border-none{
+      border: none;
+}
+.order-details .content{
+      background-color: #eee;
 }
 .order-details .details-local{
       font-size: 16px;
@@ -73,6 +82,31 @@
 .popup-box .ewm{
       width: 95px;
       height: 95px;
+}
+@media screen and (min-width: 700px){
+      .order-details{
+            height: calc(100% - 390px);
+            height: -webkit-calc(100% - 390px);
+            height: -moz-calc(100% - 390px);
+            height: -o-calc(100% - 390px);
+      }
+}
+.popup-com span{
+      z-index: 5000;
+    color: #000;
+    position: absolute;
+    left: 50%;
+    top: 72%;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    line-height: 40px;
+    font-size: 26px;
+    vertical-align: bottom;
+    margin-left: -20px;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
 }
 </style>
 <script>
@@ -164,26 +198,22 @@ export default {
       mounted(){
             this.$nextTick(()=>{
                   let wrapper = document.querySelector('.wrapper');
-                  let scroll = new BScroll('.wrapper',{
-                        scrollY: true,
-                        click: true
-                  })
+                  if(!this.scroll){
+                        this.scroll = new BScroll(wrapper,{
+                              click: true,
+                              taps: true,
+                              mouseWheel: true,
+                        })
+                  }else{
+                        this.scroll.refresh();
+                  }
             })
       },
       created(){
-            // this.$nextTick(()=>{
-            //       let wrapper = document.querySelector('.wrapper');
-            //       let scroll = new BScroll('.wrapper',{
-            //             scrollY: true,
-            //             click: true
-            //       })
-            // })
+            
       },
       methods:{
-            myclick(){
-                  console.log(11)
-                  this.ishow = -1;
-            },
+           
            
       }
 }

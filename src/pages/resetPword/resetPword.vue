@@ -97,9 +97,7 @@
       background: url("./../../assets/imgs/phone-icon.png") center no-repeat;
       background-size: 16px 22px;
 }
-.cell i{
-      font-size: 18px !important;
-}
+
 .cell input{
       background-color: transparent !important;
 }
@@ -120,6 +118,12 @@
 .resetPword-input i{
       font-size: 18px !important;
 }
+@media screen and (min-width: 700px){
+      input{
+            font-size: 16px;
+      }
+}
+
 </style>
 <script>
 import { Header } from 'mint-ui';

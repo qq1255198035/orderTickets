@@ -5,9 +5,9 @@
                         <mt-button icon="back"></mt-button>
                   </router-link>
             </Header>
-            <div class="cellBox">
+            <div class="cellBox pd-cellBox">
                   <mt-cell title="头像" to="/userImg" is-link class="cell">
-                        <img slot="icon" :src="userInfo.userImg" width="24" height="24" class="right">
+                        <img slot="icon" :src="userInfo.userImg" width="40" height="40" class="right">
                   </mt-cell>
                   <mt-cell title="电子邮箱" :value="userInfo.userEmail" class="cell">
                         
@@ -24,7 +24,7 @@
             </div>
       </div>
 </template>
-<style scoped>
+<style>
 .cellBox{
       padding: 40px 10px;
 }
@@ -34,7 +34,14 @@
 .mint-cell-title img.right{
       float: right;
 }
-
+.pd-cellBox .mint-cell-title img{
+      border: 1px solid #ccc;
+      padding: 1px;
+      border-radius: 2px;
+}
+.mint-cell-title .mint-cell-text{
+      line-height: 40px;
+}
 </style>
 <script>
 import { Header, Cell } from 'mint-ui';

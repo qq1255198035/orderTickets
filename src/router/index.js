@@ -18,8 +18,10 @@ import details2 from "./../pages/details/details2";
 import buy from "./../pages/buy/buy"
 import pay from "./../pages/pay/pay"
 import coupon from "./../pages/coupon/coupon"
+import mycoupon from "./../pages/coupon/mycoupon"
 import orderDetails from "./../pages/orderDetails/orderDetails";
 import payresult from "./../pages/payresult/payresult"
+
 export default new VueRouter({
       //name 路由名称 判断Tab栏active  $route.name == ?
       routes:[
@@ -175,6 +177,14 @@ export default new VueRouter({
                   path: '/payresult',
                   name: 'payresult',
                   component: payresult,
+                  meta: {
+                        keepAlive: false
+                  }
+            },
+            {
+                  path: '/mycoupon',
+                  name: 'mycoupon',
+                  component: mycoupon,
                   meta: {
                         keepAlive: false
                   }

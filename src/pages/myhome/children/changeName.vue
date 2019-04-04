@@ -29,20 +29,20 @@
             </div>
       </div>
 </template>
-<style scoped>
+<style>
 .changeName-Box{
       width: 100%;
       height: 100%;
       padding-top: 40px;
 }
-.cell-box{
+.changeName-Box .cell-box{
       padding: 30px;
 }
-.cell{
+.changeName-Box .cell{
       border-bottom: 1px solid #ccc;
 }
 
-.button-box{
+.changeName-Box .button-box{
       width: 100%;
       padding: 0 30px;
       left: 0;
@@ -52,11 +52,13 @@
       display: flex;
       align-items: center;
 }
-.my-button{
+.changeName-Box .my-button{
       background-color: #008e98;
       color: #fff;
 }
-
+.changeName-Box .van-field__label{
+      max-width: 30px;
+}
 </style>
 <script>
 import { Header } from 'mint-ui';

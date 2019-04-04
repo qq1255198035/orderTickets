@@ -16,7 +16,7 @@
                         <div class="content">
                                <Checkbox-group v-model="checkedGoods">
                         <Checkbox v-for="(item, index) in goods" :key="index" :name="item.id" checked-color="#008e98" class="checkbox">
-                              <Card :num="item.num" :price="item.price" :desc="item.desc" :title="item.title" :thumb="item.thumb" class="cardItem" :tag="item.tag"> 
+                              <Card :num="item.num" :price="item.price | fomatMoney" :desc="item.desc" :title="item.title" :thumb="item.thumb" class="cardItem" :tag="item.tag"> 
                                     
                               </Card>
                               <transition name="fade" mode="out-in">
@@ -36,8 +36,8 @@
                               </Checkbox>
                               <div class="submit-right">
                                     <span>合计<i>￥3333</i></span>
-                                    <Button round size="small" class="submitButton" v-show="EditIsShow">结算(<span>{{checkedGoods.length}}</span>)</Button>
-                                    <Button round size="small" class="submitButton" v-show="!EditIsShow" @click="showMessageBox">删除(<span>{{checkedGoods.length}}</span>)</Button>       
+                                    <Button round size="small" class="submitButton" v-show="EditIsShow" :disabled="!checkedGoods.length">结算(<span>{{checkedGoods.length}}</span>)</Button>
+                                    <Button round size="small" class="submitButton" v-show="!EditIsShow" @click="showMessageBox" :disabled="!checkedGoods.length">删除(<span>{{checkedGoods.length}}</span>)</Button>       
                               </div>
                         </div>
                   </div>
@@ -57,6 +57,7 @@
 
 .cardItem{
       width: 100%;
+      background-color: #fff;
 }
 .checkbox{
       border-bottom: 1px solid #ccc;
@@ -106,6 +107,9 @@
       bottom: 10px;
       right: 24px;
 }
+.van-stepper{
+      display: flex;
+}
 .stepper button,input{
       color: #000 !important;
       border: 1px solid #ccc;
@@ -144,9 +148,53 @@
       width: 40%;
       display: block;
 }
+.cardItem .van-card__thumb{
+      width: 30%;
+      height: 100%;
+     
+}
+       
+.cardItem .van-card__header {
+    align-items: center;
+}
+.cardItem .van-card__content{
+      justify-content: flex-start;
+}
+@media screen and (min-width: 700px){
+      .cardItem .van-card__content {   
+            height: 110px;
+            justify-content: space-around;
+      }
+      .cardItem .van-card__title{
+            font-size: 24px;
+            line-height: 24px;
+      }
+      .cardItem .van-card__desc{
+            font-size: 20px;
+      }
+      .cardItem .van-card__price{
+            font-size: 16px;
+      }
+      .cardItem .van-card__num{
+            font-size: 14px;
+      }
+      .cardItem{
+            margin-left: 30px;
+      }    
+      .submit-right .submitButton{
+            font-size: 16px;
+            padding: 0 10px;
+      }
+      .stepper{
+            right: 32px
+      }
+}
+.mint-msgbox{
+      max-width: 320px;
+}
 </style>
 <script>
-
+import imgUrl from './../../assets/imgs/goodsImg.png' 
 import { Header, MessageBox} from 'mint-ui';
 import tabbar from './../../components/tabBar'
 import { Card, Checkbox, CheckboxGroup, Button, Stepper} from 'vant';
@@ -172,6 +220,7 @@ export default {
               allChecked:false,
               EditIsShow:true,
               showCance:false,
+            
               goods: [{
                         id: '1',
                         title: '篮球比赛',
@@ -179,7 +228,7 @@ export default {
                         price: 200,
                         num: 1,
                         tag:"贵宾",
-                        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/2f9a36046449dafb8608e99990b3c205.jpeg'
+                        thumb: imgUrl
                   },{
                         id: '2',
                         title: '篮球比赛',
@@ -187,7 +236,7 @@ export default {
                         price: 690,
                         num: 1,
                         tag:"贵宾",
-                        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/2f9a36046449dafb8608e99990b3c205.jpeg'
+                        thumb: imgUrl
                   },{
                         id: '3',
                         title: '篮球比赛',
@@ -195,7 +244,7 @@ export default {
                         price: 2680,
                         num: 1,
                         tag:"贵宾",
-                        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/2f9a36046449dafb8608e99990b3c205.jpeg'
+                        thumb: imgUrl
                   },
                   {
                         id: '4',
@@ -204,7 +253,7 @@ export default {
                         price: 2680,
                         num: 1,
                         tag:"贵宾",
-                        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/2f9a36046449dafb8608e99990b3c205.jpeg'
+                        thumb: imgUrl
                   },
                   {
                         id: '5',
@@ -213,7 +262,7 @@ export default {
                         price: 2680,
                         num: 1,
                         tag:"贵宾",
-                        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/2f9a36046449dafb8608e99990b3c205.jpeg'
+                        thumb: imgUrl
                   }
                   
             ]
@@ -222,8 +271,8 @@ export default {
   methods:{
         showMessageBox(){
             MessageBox({
-                  title: '提示',
-                  message: '确定执行此操作?',
+                  title: '',
+                  message: '确认要删除这'+ this.checkedGoods.length +'种商品吗?',
                   showCancelButton: true,
                   confirmButtonClass:"confirmButton"
             });
@@ -231,6 +280,11 @@ export default {
   },
   mounted(){
        
-  }
+  },
+  filters:{
+	fomatMoney(value){
+		return value.toFixed(2);
+	}
+  },
 }
 </script>

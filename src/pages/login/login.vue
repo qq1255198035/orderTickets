@@ -24,7 +24,7 @@
                                     <van-switch v-model="checked" size="16px" inactive-color="#1e4c51" active-color="#30d9c4"/>
                                     <span>记住密码？</span>
                               </div>
-                              <router-link to="/resetPword1" class="router-link">忘记密码？</router-link>
+                              <router-link to="/resetPword" class="router-link">忘记密码？</router-link>
                         </div>
                         
                   </div>

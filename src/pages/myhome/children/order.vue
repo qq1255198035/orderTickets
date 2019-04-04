@@ -12,45 +12,44 @@
                                     <Tab title="全部订单" >
                                           <div class="orderItem" v-for="(item,index) in orderInfo" :key="index">
                                                 <div class="tab-box">
+                                                      <p>{{item.orderTitle}}</p>
                                                       <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
                                                       <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
                                                 </div>
-                                                <Card
-                                                      :num="item.num"
-                                                      :price="item.price | fomatMoney"
-                                                      :desc="item.desc"  
-                                                      :title="item.orderTitle"
-                                                      :thumb="item.imgUrl"
-                                                >
-                                                      <div slot="footer">
-                                                            <Button size="small" round plain v-if="item.orderStatus == 1">查看劵码</Button>
-                                                            <Button size="small" round plain v-if="item.orderStatus == 0">查看详情</Button>
-                                                            <Button size="small" round plain v-if="item.orderStatus == 0">去付款</Button>
+                                                <div class="order-content">
+                                                      <img :src="item.imgUrl" alt="">
+                                                      <div class="card-text">
+                                                            <p>{{item.num}}张 | 总价 {{item.price | fomatMoney}}</p>
+                                                            <span>有效日期：{{item.desc}}</span>
                                                       </div>
-                                                </Card>
+                                                </div>
+                                                <div class="card-footer">
+                                                      <Button size="small" round plain v-if="item.orderStatus == 1" to="/orderDetails">查看劵码</Button>
+                                                      <Button size="small" round plain v-if="item.orderStatus == 0" @click="cancelOrder">取消订单</Button>
+                                                      <Button size="small" round plain v-if="item.orderStatus == 0" to="/pay">去付款</Button>
+                                                </div>
                                           </div>
                                    
                                     </Tab>
                                     <Tab title="待付款">
                                           <div class="orderItem" v-for="(item,index) in orderStatusFilter0" :key="index">
                                                 <div class="tab-box">
+                                                      <p>{{item.orderTitle}}</p>
                                                       <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
                                                       <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
                                                 </div>
-                                                <Card
-                                                      :num="item.num"
-                                                      :price="item.price | fomatMoney"
-                                                      :desc="item.desc"  
-                                                      :title="item.orderTitle"
-                                                      :thumb="item.imgUrl"
-                                                >
-                                                      <div slot="footer">
-                                                            <Button size="small" round plain v-if="item.orderStatus == 1">查看劵码</Button>
-                                                            <Button size="small" round plain v-if="item.orderStatus == 0">查看详情</Button>
-                                                            <Button size="small" round plain v-if="item.orderStatus == 0">去付款</Button>
-                                    
+                                                <div class="order-content">
+                                                      <img :src="item.imgUrl" alt="">
+                                                      <div class="card-text">
+                                                            <p>{{item.num}}张 | 总价 {{item.price | fomatMoney}}</p>
+                                                            <span>有效日期：{{item.desc}}</span>
                                                       </div>
-                                                </Card>
+                                                </div>
+                                                <div class="card-footer">
+                                                      <Button size="small" round plain v-if="item.orderStatus == 1" to="/orderDetails">查看劵码</Button>
+                                                      <Button size="small" round plain v-if="item.orderStatus == 0" @click="cancelOrder">取消订单</Button>
+                                                      <Button size="small" round plain v-if="item.orderStatus == 0" to="/pay">去付款</Button>
+                                                </div>
                                           </div>
                                     
                               
@@ -59,22 +58,22 @@
                                     <Tab title="可使用">
                                           <div class="orderItem" v-for="(item,index) in orderStatusFilter1" :key="index">
                                                 <div class="tab-box">
+                                                      <p>{{item.orderTitle}}</p>
                                                       <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
                                                       <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
                                                 </div>
-                                                <Card
-                                                      :num="item.num"
-                                                      :price="item.price | fomatMoney"
-                                                      :desc="item.desc"  
-                                                      :title="item.orderTitle"
-                                                      :thumb="item.imgUrl"
-                                                >
-                                                      <div slot="footer">
-                                                            <Button size="small" round plain v-if="item.orderStatus == 1">查看劵码</Button>
-                                                            <Button size="small" round plain v-if="item.orderStatus == 0">查看详情</Button>
-                                                            <Button size="small" round plain v-if="item.orderStatus == 0">去付款</Button>
+                                                <div class="order-content">
+                                                      <img :src="item.imgUrl" alt="">
+                                                      <div class="card-text">
+                                                            <p>{{item.num}}张 | 总价 {{item.price | fomatMoney}}</p>
+                                                            <span>有效日期：{{item.desc}}</span>
                                                       </div>
-                                                </Card>
+                                                </div>
+                                                <div class="card-footer">
+                                                      <Button size="small" round plain v-if="item.orderStatus == 1" to="/orderDetails">查看劵码</Button>
+                                                      <Button size="small" round plain v-if="item.orderStatus == 0" @click="cancelOrder">取消订单</Button>
+                                                      <Button size="small" round plain v-if="item.orderStatus == 0" to="/pay">去付款</Button>
+                                                </div>
                                           </div>
                                     </Tab>
                               </Tabs>
@@ -92,12 +91,13 @@
             padding-top: 40px;
             height:100%;
       }
-      .main-wrapper{
-            padding: 0 10px;
+      .main .content{
+            background-color: #eee;
       }
       .orderItem{
             position: relative;
             margin: 10px 0;
+            background-color: #fff;
       }
       .orderItem .van-card{
             background-color: #fff;
@@ -111,6 +111,8 @@
       }
       .orderItem .van-card .van-card__header{
             background-color: #eee;
+            padding: 0 10px;
+            align-items: center;
       }
       .orderItem .van-card .van-card__footer{
             margin-top: 10px;
@@ -121,10 +123,14 @@
             color: #008e98; 
       }
       .tab-box{
-            position: absolute;
-            right: 10px;
-            top:0;
+            
             z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0 10px 10px;
+      }
+      .tab-box p{
+            color: #333;
       }
       .orderEmpty{
             width: 100%;
@@ -153,10 +159,67 @@
             right: 0;
             margin: 0 auto;
       }
+      .orderItem .van-card__thumb{
+            width: 30%;
+            height: 100%;
+            padding: 5px;
+      }
+      .order-content{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            
+            background-color: #eee;
+      }
+      .order-content img{
+            width: 30%;
+            padding: 10px;
+            
+      }
+      .card-footer{
+            text-align: right;
+            padding: 10px 0;
+      }
+      .card-footer button{
+            margin-right: 10px;
+      }
+      .card-text{
+            margin-left: 10%;
+      }
+      .card-text p{
+                  font-size: 14px;
+                  color: #333;
+                  
+            }
+            .card-text span{
+                  font-size: 12px;
+                  
+                  color: #333;
+            }
+      @media screen and (min-width: 700px){
+            .order-content img{
+                  padding: 30px;
+            }
+            .card-text p{
+                  font-size: 24px;
+                  margin-bottom: 10px;
+            }
+            .card-text span{
+                  font-size: 20px;
+                  margin-top: 10px;
+            }
+            .tab-box p{
+                  font-size: 24px;
+            }
+            .tab-box span{
+                  font-size: 20px;
+            }
+            
+      }
 </style>
 <script>
-import BScroll from 'better-scroll'
-import {Header} from 'mint-ui';
+
+import {Header, MessageBox} from 'mint-ui';
 import { Tab, Tabs, Button, Card, Tag} from 'vant';
 import 'vant/lib/tab/style'
 import 'vant/lib/tabs/style'
@@ -171,7 +234,8 @@ export default {
             Tabs,
             Card,
             Button,
-            Tag
+            Tag,
+            MessageBox
       },
       data(){
             return{
@@ -180,7 +244,7 @@ export default {
                         {     
                               orderStatus:0,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:1,
                               price:200,
                               imgUrl:imgUrl
@@ -188,7 +252,7 @@ export default {
                         {     
                               orderStatus:1,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:2,
                               price:200,
                               imgUrl:imgUrl
@@ -196,7 +260,7 @@ export default {
                         {     
                               orderStatus:0,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:3,
                               price:200,
                               imgUrl:imgUrl
@@ -204,7 +268,7 @@ export default {
                         {     
                               orderStatus:1,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:4,
                               price:200,
                               imgUrl:imgUrl
@@ -212,7 +276,7 @@ export default {
                         {     
                               orderStatus:0,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:5,
                               price:200,
                               imgUrl:imgUrl
@@ -220,7 +284,7 @@ export default {
                          {     
                               orderStatus:1,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:4,
                               price:200,
                               imgUrl:imgUrl
@@ -228,7 +292,7 @@ export default {
                         {     
                               orderStatus:0,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:5,
                               price:200,
                               imgUrl:imgUrl
@@ -236,7 +300,7 @@ export default {
                          {     
                               orderStatus:1,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:4,
                               price:200,
                               imgUrl:imgUrl
@@ -244,7 +308,7 @@ export default {
                         {     
                               orderStatus:0,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:5,
                               price:200,
                               imgUrl:imgUrl
@@ -252,7 +316,7 @@ export default {
                          {     
                               orderStatus:1,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:4,
                               price:200,
                               imgUrl:imgUrl
@@ -260,7 +324,7 @@ export default {
                         {     
                               orderStatus:0,
                               orderTitle:"篮球比赛",
-                              desc:"有效日期：2019.3.30",
+                              desc:"2019.3.30",
                               num:5,
                               price:200,
                               imgUrl:imgUrl
@@ -290,5 +354,15 @@ export default {
                  
             })
       },
+      methods:{
+            cancelOrder(){
+                   MessageBox({
+                        title: '',
+                        message: '亲，确定要取消订单吗？',
+                        showCancelButton: true,
+                        confirmButtonClass:"confirmButton"
+            });
+            }
+      }
 }
 </script>

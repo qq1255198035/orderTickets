@@ -85,7 +85,7 @@
       background-size: 16px 22px;
 }
 .cell i{
-      font-size: 18px !important;
+      font-size: 20px !important;
 }
 .cell input{
       background-color: transparent !important;
@@ -102,6 +102,7 @@
       margin-left: 5px;
       padding-right: 10px;
       background-color: transparent;
+      font-size: 16px;
 }
 .myarrow{
       width: 10px;

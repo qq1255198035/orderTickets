@@ -8,7 +8,7 @@
             <div class="changeSex-Box">
                   <RadioGroup v-model="radio" class="radio-box">
                         <Radio name="1" checked-color="#008e98" class="border-bottom">男</Radio>
-                        <Radio name="2" checked-color="#008e98">女</Radio>
+                        <Radio name="2" checked-color="#008e98" class="border-bottom">女</Radio>
                   </RadioGroup>
                   <div class="button-box">
                         <Button round size="large" class="my-button" @click="commitSex">确定</Button>
@@ -67,7 +67,7 @@ export default {
       },
       methods:{
            commitSex(){
-                 console.log(this.radio)
+      
            }
       },
       mounted() {

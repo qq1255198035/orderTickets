@@ -69,7 +69,7 @@
 }
 .success-content{
       padding: 10px;
-      border-bottom: 2px solid #ccc;
+      border-bottom: 1px solid #ccc;
 }
 .success-content .mint-cell{
       min-height: 30px !important;
@@ -90,6 +90,9 @@
 }
 .pay-fail .result-title > span{
       margin-top: 10px;
+}
+.mint-cell:last-child{
+      background-image: none !important; 
 }
 </style>
 <script>

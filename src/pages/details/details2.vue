@@ -23,7 +23,7 @@
                               </template>
                               <div class="buy-message">
                                     <p>$ {{item.price}}</p>
-                                    <Tag color="#f8955c">{{item.content}}</Tag><Tag color="#f8955c" plain>${{item.discount}}</Tag>
+                                    <Tag color="#f8955c" class="tag-1">{{item.content}}</Tag><Tag color="#f8955c" plain class="tag-2">${{item.discount}}</Tag>
                               </div>
                               <Button type="warning" plain size="small" @click="buyTickets">购票</Button>
                         </Cell>
@@ -73,11 +73,19 @@
       height: 42%;
       overflow: hidden;
 }
+.buy-message .tag-1{
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+}
+.buy-message .tag-2::after{
+      border-bottom-left-radius: 0 !important;
+      border-top-left-radius: 0 !important;
+}
 </style>
 <script>
 import BScroll from 'better-scroll'
 import theme from "./../../components/theme";
-import imgUrl from './../../assets/imgs/exmple.png'
+
 import { Button,Cell, CellGroup,Tag } from "vant";
 import 'vant/lib/cell/style';
 import 'vant/lib/cell-group/style';
@@ -147,9 +155,15 @@ export default {
       mounted(){
             this.$nextTick(()=>{
                   let wrapper = document.querySelector('.wrapper');
-                  let scroll = new BScroll('.wrapper',{
-                        scrollY: true,
-                  })
+                  if(!this.scroll){
+                              this.scroll = new BScroll(wrapper,{
+                              scrollY: true,
+                              mouseWheel: true,
+                        })
+                  }else{
+                        this.scroll.refresh();
+                  }
+                  
             })
       },
       methods:{

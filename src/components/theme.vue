@@ -33,7 +33,7 @@
       height: 100%;
       padding-top: 40px;
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
 
 }

@@ -52,11 +52,14 @@
 .buy-message button,input{
       color: #000 !important;
       border: 1px solid #ccc;
-      background-color: #eee !important;
+      background-color: #fff !important;
       margin: 2px 0 !important;
 }
 .buy-message input{
-      background-color: #e5e5e5 !important;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      box-sizing: border-box;
+      height: 28px;
 }
 .van-cell{
       border-bottom: 1px solid #ccc;
@@ -120,6 +123,17 @@
 .van-cell:not(:last-child)::after{
       border-bottom: none !important;
 }
+.myToast{
+      width: 320px;
+}
+.myToast i{
+      color: #d81e06;
+}
+.buy-details .buy-message{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+}
 </style>
 <script>
 
@@ -160,10 +174,13 @@ export default {
       },
       methods:{
            addCategory(){
-                 Toast.success('添加成功 ，在购物车等亲~');
+                 Toast.success({
+                       message:"添加成功 ，在购物车等亲~",
+                       className:"myToast"
+                 });
            },
            goTobuy(){
-                 this.$router.push({ name: 'buy', query: { }})
+                 this.$router.push({ name: 'pay', query: { }})
            }
       }
 }

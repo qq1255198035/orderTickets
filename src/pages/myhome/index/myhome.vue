@@ -10,9 +10,12 @@
                         </span>
                         <p>{{userInfo.nikeName}}</p>
                   </div>
-                  <div class="cellBox">
+                  <div class="cellBox myHome-box">
                         <mt-cell title="全部订单" to="/order" is-link class="cell">
                               <img slot="icon" src="./../../../assets/imgs/orderIcon.png" width="20" height="24">
+                        </mt-cell>
+                        <mt-cell title="优惠券" to="/mycoupon" is-link class="cell">
+                              <img slot="icon" src="./../../../assets/imgs/couponIcon.png" width="24" height="20">
                         </mt-cell>
                         <mt-cell title="个人资料" to="/personalData" is-link class="cell">
                               <img slot="icon" src="./../../../assets/imgs/someOne-icon.png" width="20" height="24">
@@ -60,6 +63,9 @@
 }
 .mint-cell-wrapper{
       background-image: none !important;
+}
+.myHome-box .mint-cell-text{
+      margin-left: 10px;
 }
 </style>
 <script>

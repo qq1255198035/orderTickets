@@ -4,8 +4,10 @@
           
       </Header>
       <div class="img-box">
-            <img src="./../../assets/imgs/index-bg.png" alt="" srcset="">
+            <img src="./../../assets/imgs/index-bg.png" alt="" srcset="" @click.stop="$router.push('/details1')">
+            <router-link to="/login" class="go-login">去登陆</router-link>
       </div>
+      
       <tabbar class="tabbar"></tabbar>
   </div>
 </template>
@@ -36,6 +38,7 @@ export default {
 .img-box{
       width: 100%;
       height: 100%;
+      position: relative;
 }
 .img-box img{
       width: 100%;
@@ -45,5 +48,9 @@ export default {
 .text-actived{
       color: #008e98;
 }
-
+.go-login{
+      position: absolute;
+      top: 50px;
+      right: 20px;
+}
 </style>

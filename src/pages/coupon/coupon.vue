@@ -64,6 +64,12 @@
                         </RadioGroup>
                   </div>
             </div>
+            <div class="coupon-btn">
+                  <RadioGroup v-model="radio">
+                  <Radio name="1">不使用</Radio>
+                  </RadioGroup>
+                  <Button round size="small" class="coupon-confirm">确定</Button>
+            </div>
       </div>
 </template>
 <style>
@@ -119,27 +125,73 @@
       align-items: center;
 }
 .coupon-rule{
+      width: 100%;
       font-size: 12px;
       color: #666;
       padding: 5px 10px;
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
+      align-items: center;
 }
-.coupon-rule p{
-      margin-right: 60px;
+.coupon-btn{
+      width: 100%;
+      max-width: 750px;
+      margin: 0 auto;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0; 
+      border-top: 1px solid #ccc;
+      padding: 10px;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+}
+.coupon-confirm{
+      background-color: #008e98;
+      color: #fff;
+      width: 80px;
+}
+@media screen and (min-width: 700px){
+      .coupon1{
+            width: 540px;
+            height: 210px;
+      }
+      .coupon2{
+            width: 540px;
+            height: 210px;
+      }
+      .coupon2 > p{
+            margin-right: 165px;
+            margin-bottom: 40px;
+            font-size: 65px
+      }
+      .coupon1 > p{
+            margin-right: 165px;
+            margin-bottom: 40px;
+            font-size: 65px
+      }
+      .coupon-rule{
+            height: 60px
+      }
+      .coupon-rule p,span{
+            font-size: 16px;
+      }
 }
 </style>
 <script>
 import { Header } from 'mint-ui';
-import { RadioGroup, Radio } from 'vant';
+import { RadioGroup, Radio, Button } from 'vant';
 import 'vant/lib/radio-group/style';
 import 'vant/lib/radio/style';
+import 'vant/lib/button/style';
 export default {
       components:{
             Header,
             RadioGroup, 
-            Radio
+            Radio,
+            Button
       },
       data(){
             return{

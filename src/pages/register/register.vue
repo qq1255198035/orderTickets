@@ -72,13 +72,28 @@
                         <Radio name="2" checked-color="#008e98" class="sex-radio">女</Radio>
                   </RadioGroup>
                   <p class="login-btn">已有账号<router-link to="/login" class="login-rn">立即登录</router-link></p>
+                  <div class="bottom">
+                        <Button round size="large" class="login-button">注册</Button>
+                        
+                  </div>
             </div>
+            
       </div>
 </template>
 <style>
+.register-box input{
+     
+      background-color: #fff !important;
+}
 .register-box{
       width:100%;
       padding:60px 40px 0;
+}
+.register-box .bottom{
+      margin-top: 20px;
+}
+.register-box .bottom button{
+      background-color: #008e98;
 }
 .fullName{
       width: 100%;
@@ -86,7 +101,7 @@
       align-items: center;
 }
 .fullName i{
-      font-size: 18px !important;
+      font-size: 20px !important;
 }
 .fullName .van-cell{
       align-items: center
@@ -95,6 +110,7 @@
       width: 100%;
       display: flex;
       padding: 10px 15px;
+      border-bottom: 1px solid #ccc;
 }
 .sexImg{
       background: url("./../../assets/imgs/maw.png") top left no-repeat;
@@ -110,15 +126,21 @@
       padding: 0 20px;
 }
 .login-rn{
-      margin-left: 10px;
+      margin-left: 30px;
       color: #f8955c;
       text-decoration: underline;
+      
 }
 .margin10{
       margin:10px 0;
 }
 .mint-cell-mask::after{
       background-color: transparent !important;
+}
+@media screen and (min-width: 700px){
+      input{
+            font-size: 16px;
+      }
 }
 </style>
 <script>

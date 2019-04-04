@@ -31,6 +31,10 @@
 .game-desc p{
       font-size: 14px;
       color: #333333;
+      -webkit-user-select:none;
+      -moz-user-select:none;
+      -ms-user-select:none;
+      user-select:none;
 }
 .game-desc span{
       position: absolute;
@@ -59,6 +63,15 @@
 .stars-box li{
       margin: 0 2px;
 }
+.stars-box li span{
+      text-align: center;
+      padding: 0 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+      white-space: nowrap;
+      display: block;
+}
 .buy-btn{
       position: fixed;
       bottom: 0;
@@ -77,7 +90,22 @@
       color: #fff;
 }
 .desc-text{
-      cursor: default;
+      cursor: pointer;
+}
+@media screen and (min-width: 700px){
+      .stars-box img {
+            width: 140px;
+            height: 190px;   
+      }
+      .game-desc p{
+            font-size: 16px
+      }
+      .stars-content h3{
+            font-size: 20px
+      }
+      .game-desc{
+            height: 120px;
+      }
 }
 </style>
 <script>
@@ -97,7 +125,7 @@ export default {
                   gameDetails:{
                         title:"篮球比赛",
                         desc:"Basketball match",
-                        place:"香港",
+                        place:"香港1",
                         time:"2019-3-24 9:00-15:00",
                         person:"13000",
                         message:"有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场"
@@ -129,20 +157,34 @@ export default {
       mounted(){
             this.$nextTick(()=>{
                   let wrapper = document.querySelector('.wrapper');
-                  let scroll = new BScroll('.wrapper',{
-                        scrollY: true,
-                        click:true
-                  })
+                  if (!this.scroll) {
+                        this.scroll = new BScroll(wrapper,{
+                              click:true,
+                              mouseWheel: true,
+                        })
+                  }else{
+                        this.scroll.refresh();
+                  }
+                  
                   let wrapper1 = document.querySelector('.wrapper1');
                   let content1 = document.querySelector('.content1');
                   var children = content1.children;
                   var length = children.length;
                   content1.style.width = children[0].offsetWidth * length + 'px';
-                  let scroll1 = new BScroll('.wrapper1',{
-                        scrollX: true,
-                        click:true
-                  })
+                  if (!this.myscroll) {
+                        this.myscroll = new BScroll(wrapper1,{
+                              scrollX: true,
+                              click:true,
+                              mouseWheel: true,
+                        })
+                  }else{
+                        this.myscroll.refresh();
+                  }
+                  
             })
+      },
+      created(){
+            
       },
       methods:{
             goBuy(){
