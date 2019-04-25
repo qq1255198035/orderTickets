@@ -23,171 +23,172 @@ import orderDetails from "./../pages/orderDetails/orderDetails";
 import payresult from "./../pages/payresult/payresult"
 
 export default new VueRouter({
-      //name 路由名称 判断Tab栏active  $route.name == ?
-      routes:[
-            {
-                  path: '',
-                  redirect: '/index'
-            },
-            {
-                  path: '/index',
-                  name:'index',
-                  component: index,
-                  meta: {
-                        keepAlive: true
-                  },
-            },
-            {
-                  path: '/category',
-                  name: 'category',
-                  component: category,
-                  meta: {
-                        keepAlive: true
-                  },    
-            },
-            {
-                  path: '/myhome',
-                  name: 'myhome',
-                  component: myhome,
-                  meta: {
-                        keepAlive: true
-                  },
-            },
-            {
-                  path: '/order',
-                  name: 'order',
-                  component: order,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/personalData',
-                  name: 'personalData',
-                  component: personalData,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/userImg',
-                  name: 'userImg',
-                  component: userImg,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/changeName',
-                  name: 'changeName',
-                  component: changeName,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/changeNumber',
-                  name: 'changeNumber',
-                  component: changeNumber,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/changeSex',
-                  name: 'changeSex',
-                  component: changeSex,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/login',
-                  name: 'login',
-                  component: login,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/register',
-                  name: 'register',
-                  component: register,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/resetPword',
-                  name: 'resetPword',
-                  component: resetPword,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/details1',
-                  name: 'details1',
-                  component: details1,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/details2',
-                  name: 'details2',
-                  component: details2,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/buy',
-                  name: 'buy',
-                  component: buy,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/pay',
-                  name: 'pay',
-                  component: pay,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/coupon',
-                  name: 'coupon',
-                  component: coupon,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/orderDetails',
-                  name: 'orderDetails',
-                  component: orderDetails,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/payresult',
-                  name: 'payresult',
-                  component: payresult,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-            {
-                  path: '/mycoupon',
-                  name: 'mycoupon',
-                  component: mycoupon,
-                  meta: {
-                        keepAlive: false
-                  }
-            },
-      ]
-})
+  //name 路由名称 判断Tab栏active  $route.name == ?
+  mode: "history",
+  routes: [
+    {
+      path: "",
+      redirect: "/index"
+    },
+    {
+      path: "/index",
+      name: "index",
+      component: index,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: "/category",
+      name: "category",
+      component: category,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: "/myhome",
+      name: "myhome",
+      component: myhome,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: "/order",
+      name: "order",
+      component: order,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/personalData",
+      name: "personalData",
+      component: personalData,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/userImg",
+      name: "userImg",
+      component: userImg,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/changeName",
+      name: "changeName",
+      component: changeName,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/changeNumber",
+      name: "changeNumber",
+      component: changeNumber,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/changeSex",
+      name: "changeSex",
+      component: changeSex,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: login,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: register,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/resetPword",
+      name: "resetPword",
+      component: resetPword,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/details1",
+      name: "details1",
+      component: details1,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/details2",
+      name: "details2",
+      component: details2,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/buy",
+      name: "buy",
+      component: buy,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/pay",
+      name: "pay",
+      component: pay,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/coupon",
+      name: "coupon",
+      component: coupon,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/orderDetails",
+      name: "orderDetails",
+      component: orderDetails,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/payresult",
+      name: "payresult",
+      component: payresult,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: "/mycoupon",
+      name: "mycoupon",
+      component: mycoupon,
+      meta: {
+        keepAlive: false
+      }
+    }
+  ]
+});
