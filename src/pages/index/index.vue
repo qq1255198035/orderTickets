@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header :title="this.$t('message.sponsorCube')" class="header"></Header>
+    <Header :title='this.$t("m.title")' class="header"></Header>
     <div class="img-box">
       <img :src="imgUrl.avatar" alt srcset @click.stop="activityDetail(imgUrl)">
     </div>

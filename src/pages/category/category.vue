@@ -247,6 +247,7 @@ input {
   }
   .cardItem {
     margin-left: 30px;
+    padding-bottom: 20px
   }
   .submit-right .submitButton {
     font-size: 16px;

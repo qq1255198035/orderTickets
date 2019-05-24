@@ -1,4 +1,3 @@
-const message = {
-      sponsorCube: '讚立方',
+export const m = {
+      title: '讚立方',
 }
-export default message;

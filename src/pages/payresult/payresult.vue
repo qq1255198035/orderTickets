@@ -112,7 +112,7 @@ export default {
             return{
                   payResult:{
                         code:0,
-                        title:"支付成功",
+                        title:"",
                         orderNum:"201604231631311",
                         price:"1.06",
                         payment:"PAYPAL",

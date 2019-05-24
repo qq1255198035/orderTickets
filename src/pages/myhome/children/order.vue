@@ -12,43 +12,43 @@
                                     <Tab title="全部订单" >
                                           <div class="orderItem" v-for="(item,index) in orderInfo" :key="index">
                                                 <div class="tab-box">
-                                                      <p>{{item.orderTitle}}</p>
-                                                      <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
-                                                      <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
+                                                      <p>{{item.tradeName}}</p>
+                                                      <Tag plain type="danger" round v-if="item.pay_status == 1">待使用</Tag>
+                                                      <Tag plain type="danger" round v-if="item.pay_status == 0">待付款</Tag>
                                                 </div>
                                                 <div class="order-content">
-                                                      <img :src="item.imgUrl" alt="">
+                                                      <img :src="item.imageUrl" alt="">
                                                       <div class="card-text">
-                                                            <p>{{item.num}}张 | 总价 {{item.price | fomatMoney}}</p>
-                                                            <span>有效日期：{{item.desc}}</span>
+                                                            <p>{{item.couponNum}}张 | 总价 {{item.actual_price | fomatMoney}}</p>
+                                                            <span>有效日期：{{item.competition_time}}</span>
                                                       </div>
                                                 </div>
                                                 <div class="card-footer">
-                                                      <Button size="small" round plain v-if="item.orderStatus == 1" to="/orderDetails">查看劵码</Button>
-                                                      <Button size="small" round plain v-if="item.orderStatus == 0" @click="cancelOrder">取消订单</Button>
-                                                      <Button size="small" round plain v-if="item.orderStatus == 0" to="/pay">去付款</Button>
+                                                      <Button size="small" round plain v-if="item.pay_status == 1" @click="orderDetails(item)">查看劵码</Button>
+                                                      <Button size="small" round plain v-if="item.pay_status == 0" @click="cancelOrder(item)">取消订单</Button>
+                                                      <Button size="small" round plain v-if="item.pay_status == 0" @click="payTo(item)">去付款</Button>
                                                 </div>
                                           </div>
                                    
                                     </Tab>
                                     <Tab title="待付款">
-                                          <div class="orderItem" v-for="(item,index) in orderStatusFilter0" :key="index">
+                                          <div class="orderItem" v-for="(item,index) in pay_statusFilter0" :key="index">
                                                 <div class="tab-box">
-                                                      <p>{{item.orderTitle}}</p>
-                                                      <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
-                                                      <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
+                                                      <p>{{item.tradeName}}</p>
+                                                      <Tag plain type="danger" round v-if="item.pay_status == 1">待使用</Tag>
+                                                      <Tag plain type="danger" round v-if="item.pay_status == 0">待付款</Tag>
                                                 </div>
                                                 <div class="order-content">
-                                                      <img :src="item.imgUrl" alt="">
+                                                      <img :src="item.imageUrl" alt="">
                                                       <div class="card-text">
-                                                            <p>{{item.num}}张 | 总价 {{item.price | fomatMoney}}</p>
-                                                            <span>有效日期：{{item.desc}}</span>
+                                                            <p>{{item.couponNum}}张 | 总价 {{item.actual_price | fomatMoney}}</p>
+                                                            <span>有效日期：{{item.competition_time}}</span>
                                                       </div>
                                                 </div>
                                                 <div class="card-footer">
-                                                      <Button size="small" round plain v-if="item.orderStatus == 1" to="/orderDetails">查看劵码</Button>
-                                                      <Button size="small" round plain v-if="item.orderStatus == 0" @click="cancelOrder">取消订单</Button>
-                                                      <Button size="small" round plain v-if="item.orderStatus == 0" to="/pay">去付款</Button>
+                                                      <Button size="small" round plain v-if="item.pay_status == 1" @click="orderDetails(item)">查看劵码</Button>
+                                                      <Button size="small" round plain v-if="item.pay_status == 0" @click="cancelOrder(item)">取消订单</Button>
+                                                      <Button size="small" round plain v-if="item.pay_status == 0" @click="payTo(item)">去付款</Button>
                                                 </div>
                                           </div>
                                     
@@ -56,23 +56,23 @@
                               
                                     </Tab>
                                     <Tab title="可使用">
-                                          <div class="orderItem" v-for="(item,index) in orderStatusFilter1" :key="index">
+                                          <div class="orderItem" v-for="(item,index) in pay_statusFilter1" :key="index">
                                                 <div class="tab-box">
-                                                      <p>{{item.orderTitle}}</p>
-                                                      <Tag plain type="danger" round v-if="item.orderStatus == 1">待使用</Tag>
-                                                      <Tag plain type="danger" round v-if="item.orderStatus == 0">待付款</Tag>
+                                                      <p>{{item.tradeName}}</p>
+                                                      <Tag plain type="danger" round v-if="item.pay_status == 1">待使用</Tag>
+                                                      <Tag plain type="danger" round v-if="item.pay_status == 0">待付款</Tag>
                                                 </div>
                                                 <div class="order-content">
-                                                      <img :src="item.imgUrl" alt="">
+                                                      <img :src="item.imageUrl" alt="">
                                                       <div class="card-text">
-                                                            <p>{{item.num}}张 | 总价 {{item.price | fomatMoney}}</p>
-                                                            <span>有效日期：{{item.desc}}</span>
+                                                            <p>{{item.couponNum}}张 | 总价 {{item.actual_price | fomatMoney}}</p>
+                                                            <span>有效日期：{{item.competition_time}}</span>
                                                       </div>
                                                 </div>
                                                 <div class="card-footer">
-                                                      <Button size="small" round plain v-if="item.orderStatus == 1" to="/orderDetails">查看劵码</Button>
-                                                      <Button size="small" round plain v-if="item.orderStatus == 0" @click="cancelOrder">取消订单</Button>
-                                                      <Button size="small" round plain v-if="item.orderStatus == 0" to="/pay">去付款</Button>
+                                                      <Button size="small" round plain v-if="item.pay_status == 1" @click="orderDetails(item)">查看劵码</Button>
+                                                      <Button size="small" round plain v-if="item.pay_status == 0" @click="cancelOrder(item)">取消订单</Button>
+                                                      <Button size="small" round plain v-if="item.pay_status == 0" @click="payTo(item)">去付款</Button>
                                                 </div>
                                           </div>
                                     </Tab>
@@ -172,7 +172,8 @@
             background-color: #eee;
       }
       .order-content img{
-            width: 30%;
+            width: 140px;
+            height: 140px;
             padding: 10px;
             
       }
@@ -198,6 +199,8 @@
             }
       @media screen and (min-width: 700px){
             .order-content img{
+                  width: 200px;
+                  height: 200px;
                   padding: 30px;
             }
             .card-text p{
@@ -240,112 +243,23 @@ export default {
       data(){
             return{
                   active:"0",
-                  orderInfo:[
-                        {     
-                              orderStatus:0,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:1,
-                              price:200,
-                              imgUrl:imgUrl
-                        },
-                        {     
-                              orderStatus:1,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:2,
-                              price:200,
-                              imgUrl:imgUrl
-                        },
-                        {     
-                              orderStatus:0,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:3,
-                              price:200,
-                              imgUrl:imgUrl
-                        },
-                        {     
-                              orderStatus:1,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:4,
-                              price:200,
-                              imgUrl:imgUrl
-                        },
-                        {     
-                              orderStatus:0,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:5,
-                              price:200,
-                              imgUrl:imgUrl
-                        },
-                         {     
-                              orderStatus:1,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:4,
-                              price:200,
-                              imgUrl:imgUrl
-                        },
-                        {     
-                              orderStatus:0,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:5,
-                              price:200,
-                              imgUrl:imgUrl
-                        },
-                         {     
-                              orderStatus:1,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:4,
-                              price:200,
-                              imgUrl:imgUrl
-                        },
-                        {     
-                              orderStatus:0,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:5,
-                              price:200,
-                              imgUrl:imgUrl
-                        },
-                         {     
-                              orderStatus:1,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:4,
-                              price:200,
-                              imgUrl:imgUrl
-                        },
-                        {     
-                              orderStatus:0,
-                              orderTitle:"篮球比赛",
-                              desc:"2019.3.30",
-                              num:5,
-                              price:200,
-                              imgUrl:imgUrl
-                        }
-                  ]
+                  orderInfo:[]
             }
       },
       filters:{
 		fomatMoney(value){
-			return value.toFixed(2);
+			return parseInt(value).toFixed(2);
 		}
 	},
       computed:{
-            orderStatusFilter1(){
+            pay_statusFilter1(){
                   return this.orderInfo.filter(ele =>{
-                       return ele.orderStatus == 1
+                       return ele.pay_status == 1
                   })
             },
-            orderStatusFilter0(){
+            pay_statusFilter0(){
                   return this.orderInfo.filter(ele =>{
-                       return ele.orderStatus == 0
+                       return ele.pay_status == 0
                   })
             }
       },
@@ -359,14 +273,18 @@ export default {
       },
       methods:{
             _allOrder() {
-                  const userid = this.$ls.get("userid")
-                  this.$post(this.$api.allOrders, {
-                        userid: userid
-                  }).then(res => {
+                  const params = {
+                        userid: this.$ls.get("userid")
+                  }
+                  this.$post(this.$api.allOrders, params).then(res => {
                         console.log(res)
+                        this.orderInfo = res.data
                   })
             },
-            cancelOrder(){
+            cancelOrder(item){
+                  const params = {
+                        id: item.id
+                  }
                    MessageBox({
                         title: '',
                         message: '亲，确定要取消订单吗？',
@@ -374,9 +292,28 @@ export default {
                         confirmButtonClass:"confirmButton"
                   }).then(res => {
                         if(res == "confirm") {
-                              this.$post(this.$api.changeOrder).then(res => {
+                              this.$post(this.$api.changeOrder, params).then(res => {
                                     console.log(res)
                               })
+                        }
+                  })
+            },
+            orderDetails(item) {
+                  const params = {
+
+                  }
+                  this.$router.push({
+                        path: '/orderDetails',
+                        query: {
+
+                        }
+                  })
+            },
+            payTo(item) {
+                  this.$router.push({
+                        path: '/pay',
+                        query: {
+                              price: item.actual_price
                         }
                   })
             }
