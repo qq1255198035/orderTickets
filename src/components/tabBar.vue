@@ -38,6 +38,7 @@ export default {
       max-width: 750px;
       min-width: 320px;
       width: 100%;
+      height: 56px;
       position: fixed;
       bottom: 0;
       left: 0;

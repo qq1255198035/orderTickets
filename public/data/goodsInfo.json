@@ -1,0 +1,39 @@
+{
+      "status": 0,
+      "data":{
+            "gameDetails": {
+                        "id": 0,
+                        "title": "篮球比赛",
+                        "desc": "Basketball match",
+                        "place": "香港1",
+                        "time": "2019-3-24 9:00-15:00",
+                        "person": "13000",
+                        "message": "有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场"
+                  },
+            "stars": [{
+                        "imgUrl": "http://localhost:8080/exmple.png",
+                        "starsName": "23333"
+                  },
+                  {
+                        "imgUrl": "http://localhost:8080/exmple.png",
+                        "starsName": "23333"
+                  },
+                  {
+                        "imgUrl": "http://localhost:8080/exmple.png",
+                        "starsName": "23333"
+                  },
+                  {
+                        "imgUrl": "http://localhost:8080/exmple.png",
+                        "starsName": "23333"
+                  },
+                  {
+                        "imgUrl": "http://localhost:8080/exmple.png",
+                        "starsName": "23333"
+                  },
+                  {
+                        "imgUrl": "http://localhost:8080/exmple.png",
+                        "starsName": "23333"
+                  }
+            ]
+      }
+}

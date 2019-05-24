@@ -8,13 +8,13 @@
             </Header>
             <div class="panel">
                   <div class="goods-img">
-                        <img src="./../assets/imgs/goodsImg.png" alt="">
+                        <img width="120" height="120" :src="imgTitle" alt="">
                   </div>
                   <div class="desc">
                         <h3>{{title}}</h3>
                         <h4>{{desc}}</h4>
                         <p>地点：{{place}}</p>
-                        <p>时间：{{time}}</p>
+                        <p>时间：{{time}} {{startTime}}-{{overTime}}</p>
                         <p>人数：{{person}}</p>
                   </div>
             </div>
@@ -38,13 +38,17 @@
 
 }
 .goods-img{
-      padding: 20px;
+      flex: 0 0 120px;
+      width: 120px;
+      height: 120px;
+      margin: 20px;
 }
 .goods-img img{
-      display: block;
-      width: 85%;
+      /**display: block;
+      width: 85%;**/
 }
 .desc{
+      flex: 1;
       color:#fff;
 }
 .desc h3{
@@ -64,6 +68,7 @@
 @media screen and (min-width: 700px) {
       .goods-img img{
             width: 100%;
+            height: 100%;
       }
       .desc h3{
             font-size: 30px;
@@ -77,8 +82,9 @@
       font-size: 20px;
       }
       .goods-img{
+            flex: 0 0 220px;
             width: 220px;
-            height: 272px;
+            height: 220px;
       }
 
 }
@@ -92,6 +98,6 @@ export default {
             Header,
             Button
       },
-      props:["title","desc","place","time","person","Htitle"]
+      props:["title","desc","place","time","startTime","overTime","person","Htitle","imgTitle"]
 }
 </script>

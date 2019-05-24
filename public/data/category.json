@@ -1,0 +1,44 @@
+{
+      "status": 0,
+      "data":{
+            "list":[
+                  {
+                        "id": 0,
+                        "title": "篮球比赛",
+                        "desc": "Basketball match",
+                        "price": 200,
+                        "num": 1,
+                        "tag": "贵宾",
+                        "thumb": "http://localhost:8080/goodsImg.png"
+                  },
+                  {
+                        "id": 1,
+                        "title": "篮球比赛",
+                        "desc": "Basketball match",
+                        "price": 200,
+                        "num": 1,
+                        "tag": "贵宾",
+                        "thumb": "http://localhost:8080/goodsImg.png"
+                  },
+                  {
+                        "id": 2,
+                        "title": "篮球比赛",
+                        "desc": "Basketball match",
+                        "price": 200,
+                        "num": 1,
+                        "tag": "贵宾",
+                        "thumb": "http://localhost:8080/goodsImg.png"
+                  },
+                  {
+                        "id": 3,
+                        "title": "篮球比赛",
+                        "desc": "Basketball match",
+                        "price": 200,
+                        "num": 1,
+                        "tag": "贵宾",
+                        "thumb": "http://localhost:8080/goodsImg.png"
+                  }
+                 
+            ]
+      }
+}

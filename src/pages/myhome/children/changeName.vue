@@ -87,10 +87,10 @@ export default {
             commitUserName(){
                   //TODO
                   //判断输入姓名是否为空
-                  if(this.userName.lastName == ''){
+                  if(!this.userName.lastName){
                         this.errorMessage.lastMessage = "请填写您的姓氏"
                   }
-                  if(this.userName.firstName == ''){
+                  if(!this.userName.firstName){
                         this.errorMessage.firstMessage = "请填写您的名字"
                   }
                   

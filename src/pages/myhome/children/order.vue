@@ -354,14 +354,31 @@ export default {
                  
             })
       },
+      created() {
+            this._allOrder()
+      },
       methods:{
+            _allOrder() {
+                  const userid = this.$ls.get("userid")
+                  this.$post(this.$api.allOrders, {
+                        userid: userid
+                  }).then(res => {
+                        console.log(res)
+                  })
+            },
             cancelOrder(){
                    MessageBox({
                         title: '',
                         message: '亲，确定要取消订单吗？',
                         showCancelButton: true,
                         confirmButtonClass:"confirmButton"
-            });
+                  }).then(res => {
+                        if(res == "confirm") {
+                              this.$post(this.$api.changeOrder).then(res => {
+                                    console.log(res)
+                              })
+                        }
+                  })
             }
       }
 }

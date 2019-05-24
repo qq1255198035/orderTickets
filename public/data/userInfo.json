@@ -1,0 +1,11 @@
+{
+      "status": 0,
+      "data":{
+            "lastName": "wang",
+            "firstName": "z",
+            "email": "192168@qq.com",
+            "tel": "18656321452",
+            "avatar": "https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png",
+            "sex": "男"
+      }
+}

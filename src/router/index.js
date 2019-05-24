@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { pays } from '@common/js/com.js'
 Vue.use(VueRouter)
+
 import index from "./../pages/index/index";
 import category from "./../pages/category/category";
 import myhome from "./../pages/myhome/index/myhome";
@@ -21,6 +23,10 @@ import coupon from "./../pages/coupon/coupon"
 import mycoupon from "./../pages/coupon/mycoupon"
 import orderDetails from "./../pages/orderDetails/orderDetails";
 import payresult from "./../pages/payresult/payresult"
+import paypals from "./../pages/paypals/paypals"
+import payRequst from "./../pages/payPal/payPal"
+import apis from "./../pages/api/api"
+import { resolve } from 'q';
 
 export default new VueRouter({
   //name 路由名称 判断Tab栏active  $route.name == ?
@@ -35,7 +41,8 @@ export default new VueRouter({
       name: "index",
       component: index,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        login: false
       }
     },
     {
@@ -43,7 +50,8 @@ export default new VueRouter({
       name: "category",
       component: category,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        login: true
       }
     },
     {
@@ -51,7 +59,8 @@ export default new VueRouter({
       name: "myhome",
       component: myhome,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        login: true
       }
     },
     {
@@ -59,7 +68,8 @@ export default new VueRouter({
       name: "order",
       component: order,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
     },
     {
@@ -67,7 +77,8 @@ export default new VueRouter({
       name: "personalData",
       component: personalData,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
     },
     {
@@ -75,7 +86,8 @@ export default new VueRouter({
       name: "userImg",
       component: userImg,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
     },
     {
@@ -83,7 +95,8 @@ export default new VueRouter({
       name: "changeName",
       component: changeName,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
     },
     {
@@ -91,7 +104,8 @@ export default new VueRouter({
       name: "changeNumber",
       component: changeNumber,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
     },
     {
@@ -99,7 +113,8 @@ export default new VueRouter({
       name: "changeSex",
       component: changeSex,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
     },
     {
@@ -107,7 +122,7 @@ export default new VueRouter({
       name: "login",
       component: login,
       meta: {
-        keepAlive: false
+        keepAlive: false,
       }
     },
     {
@@ -115,7 +130,7 @@ export default new VueRouter({
       name: "register",
       component: register,
       meta: {
-        keepAlive: false
+        keepAlive: false,
       }
     },
     {
@@ -123,7 +138,8 @@ export default new VueRouter({
       name: "resetPword",
       component: resetPword,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: false
       }
     },
     {
@@ -131,7 +147,8 @@ export default new VueRouter({
       name: "details1",
       component: details1,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: false
       }
     },
     {
@@ -139,7 +156,8 @@ export default new VueRouter({
       name: "details2",
       component: details2,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: false
       }
     },
     {
@@ -147,15 +165,17 @@ export default new VueRouter({
       name: "buy",
       component: buy,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: false
       }
     },
     {
       path: "/pay",
-      name: "pay",
+      name: 'pay',
       component: pay,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
     },
     {
@@ -163,7 +183,8 @@ export default new VueRouter({
       name: "coupon",
       component: coupon,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
     },
     {
@@ -171,7 +192,8 @@ export default new VueRouter({
       name: "orderDetails",
       component: orderDetails,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
     },
     {
@@ -179,7 +201,8 @@ export default new VueRouter({
       name: "payresult",
       component: payresult,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
     },
     {
@@ -187,8 +210,25 @@ export default new VueRouter({
       name: "mycoupon",
       component: mycoupon,
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        login: true
       }
+    },
+    {
+      path: "/paypals",
+      name: "paypals",
+      component: paypals,
+      /**children: [
+        {
+          path: '/api/payPal',
+          component: payRequst
+        }
+      ]**/
+    },
+    {
+      path: "/payPal",
+      name: "payPal",
+      component: payRequst
     }
   ]
 });

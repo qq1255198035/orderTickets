@@ -1,185 +1,270 @@
 <template>
-      <div class="container">
-            <Header title="注册" class="header">
-                  <router-link to="/login" slot="left">
-                        <mt-button icon="back"></mt-button>
-                  </router-link>
-            </Header>
-            <div class="register-box">
-                  <Field v-model="userInfo.email"
-                         clearable
-                         placeholder="输入电子邮箱"
-                         class="cell"
-                         type="number"
-                         :left-icon="imgURL"
-                  />
-                  <Field v-model="userInfo.code"
-                         clearable
-                         placeholder="输入验证码"
-                         class="cell margin10"
-                         type="number"
-                         :left-icon="imgURL2"             
-                  >
-                        <Button slot="button" size="small" type="primary" class="mybutton">获取验证码</Button>
-                  </Field>
-                  <Field v-model="userInfo.code"
-                         clearable
-                         placeholder="输入登录密码"
-                         class="cell margin10"
-                         type="password"
-                         :left-icon="imgURL4" 
-                         :right-icon="imgURL3"            
-                  >
-                  </Field>
-                  <div class="fullName margin10">
-                        <Field v-model="userInfo.code"
-                         clearable
-                         placeholder="姓"
-                         
-                         type="password"
-                         :left-icon="imgURL5" 
-                                 
-                        >
-                        </Field>
-                        <Field v-model="userInfo.code"
-                         clearable
-                         placeholder="名"
-                         
-                         type="password"
-                                    
-                        >
-                        </Field>
-                  </div>
-                  <div class="cell margin10">
-                              <span class="phone-icon"></span>
-                              <select name="" id="" class="myselect">
-                                    <option value ="volvo">+86</option>
-                                    <option value ="saab"></option>
-                                    <option value="opel"></option>
-                                    <option value="audi"></option>     
-                              </select>
-                              <img src="./../../assets/imgs/arrow.png" alt="" class="myarrow">
-                              <Field v-model="userInfo.phoneNumber"
-                                     clearable 
-                                     ref="input"
-                                     type="tel"
-                                     placeholder="输入手机号码"
-                              />
-                  </div>
-                  <RadioGroup v-model="userInfo.sex" class="selecte-sex margin10">
-                        <span class="sexImg"></span>
-                        <Radio name="1" checked-color="#008e98" class="sex-radio">男</Radio>
-                        <Radio name="2" checked-color="#008e98" class="sex-radio">女</Radio>
-                  </RadioGroup>
-                  <p class="login-btn">已有账号<router-link to="/login" class="login-rn">立即登录</router-link></p>
-                  <div class="bottom">
-                        <Button round size="large" class="login-button">注册</Button>
-                        
-                  </div>
-            </div>
-            
+  <div class="container">
+    <Header title="注册" class="header">
+      <router-link to="/login" slot="left">
+        <mt-button icon="back"></mt-button>
+      </router-link>
+    </Header>
+    <div class="register-box">
+      <Field
+        v-model="userInfo.email"
+        clearable
+        placeholder="输入电子邮箱"
+        class="cell"
+        type="text"
+        :left-icon="imgURL"
+      />
+      <Field
+        v-model="userInfo.code"
+        clearable
+        placeholder="输入验证码"
+        class="cell margin10"
+        type="number"
+        :left-icon="imgURL2"
+      >
+        <Button
+          slot="button"
+          v-show="timerShow"
+          size="small"
+          type="primary"
+          @click="sendCode"
+          class="mybutton"
+        >获取验证码</Button>
+        <Button
+          slot="button"
+          v-show="!timerShow"
+          size="small"
+          disabled
+          type="primary"
+          class="mybutton"
+        >{{count}} s</Button>
+      </Field>
+      <Field
+        v-model="userInfo.password"
+        clearable
+        placeholder="输入登录密码"
+        class="cell margin10"
+        type="password"
+        :left-icon="imgURL4"
+        :right-icon="imgURL3"
+      ></Field>
+      <div class="fullName margin10">
+        <Field
+          v-model="userInfo.firstName"
+          clearable
+          placeholder="姓"
+          type="text"
+          :left-icon="imgURL5"
+        ></Field>
+        <Field v-model="userInfo.lastName" clearable placeholder="名" type="text"></Field>
       </div>
+      <div class="cell margin10">
+        <span class="phone-icon"></span>
+        <select name id class="myselect">
+          <option value="volvo">+86</option>
+          <option value="saab"></option>
+          <option value="opel"></option>
+          <option value="audi"></option>
+        </select>
+        <img src="./../../assets/imgs/arrow.png" alt class="myarrow">
+        <Field
+          v-model="userInfo.phoneNumber"
+          clearable
+          ref="input"
+          type="tel"
+          placeholder="输入手机号码"
+        />
+      </div>
+      <RadioGroup v-model="userInfo.sex" class="selecte-sex margin10">
+        <span class="sexImg"></span>
+        <Radio name="1" checked-color="#008e98" class="sex-radio">男</Radio>
+        <Radio name="2" checked-color="#008e98" class="sex-radio">女</Radio>
+      </RadioGroup>
+      <p class="login-btn">
+        已有账号
+        <router-link to="/login" class="login-rn">立即登录</router-link>
+      </p>
+      <div class="bottom">
+        <Button round size="large" v-show="show" @click="sumbit" class="login-button">注册</Button>
+        <Button round size="large" v-show="!show" disabled class="login-button">注册</Button>
+      </div>
+    </div>
+  </div>
 </template>
 <style>
-.register-box input{
-     
-      background-color: #fff !important;
+.register-box input {
+  background-color: #fff !important;
 }
-.register-box{
-      width:100%;
-      padding:60px 40px 0;
+.register-box {
+  width: 100%;
+  padding: 60px 40px 0;
 }
-.register-box .bottom{
-      margin-top: 20px;
+.register-box .bottom {
+  margin-top: 20px;
 }
-.register-box .bottom button{
-      background-color: #008e98;
+.register-box .bottom button {
+  background-color: #008e98;
 }
-.fullName{
-      width: 100%;
-      display: flex;
-      align-items: center;
+.fullName {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
-.fullName i{
-      font-size: 20px !important;
+.fullName i {
+  font-size: 20px !important;
 }
-.fullName .van-cell{
-      align-items: center
+.fullName .van-cell {
+  align-items: center;
 }
-.selecte-sex{
-      width: 100%;
-      display: flex;
-      padding: 10px 15px;
-      border-bottom: 1px solid #ccc;
+.selecte-sex {
+  width: 100%;
+  display: flex;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc;
 }
-.sexImg{
-      background: url("./../../assets/imgs/maw.png") top left no-repeat;
-      width: 20px;
-      height: 20px;
-      background-size: 20px 20px;
-      
+.sexImg {
+  background: url("./../../assets/imgs/maw.png") top left no-repeat;
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
 }
-.sex-radio{
-      margin: 0 20px;
+.sex-radio {
+  margin: 0 20px;
 }
-.login-btn{
-      padding: 0 20px;
+.login-btn {
+  padding: 0 20px;
 }
-.login-rn{
-      margin-left: 30px;
-      color: #f8955c;
-      text-decoration: underline;
-      
+.login-rn {
+  margin-left: 30px;
+  color: #f8955c;
+  text-decoration: underline;
 }
-.margin10{
-      margin:10px 0;
+.margin10 {
+  margin: 10px 0;
 }
-.mint-cell-mask::after{
-      background-color: transparent !important;
+.mint-cell-mask::after {
+  background-color: transparent !important;
 }
-@media screen and (min-width: 700px){
-      input{
-            font-size: 16px;
-      }
+@media screen and (min-width: 700px) {
+  input {
+    font-size: 16px;
+  }
 }
 </style>
 <script>
-import { Header } from 'mint-ui';
-import { Button,Field, RadioGroup, Radio } from 'vant';
-import 'vant/lib/button/style';
-import 'vant/lib/field/style';
-import 'vant/lib/radio-group/style';
-import 'vant/lib/radio/style';
-import imgURL from './../../assets/imgs/email.png'
-import imgURL2 from './../../assets/imgs/code.png'
-import imgURL3 from './../../assets/imgs/eye.png'
-import imgURL4 from './../../assets/imgs/re-password.png'
-import imgURL5 from './../../assets/imgs/personal.png'
+import { Header } from "mint-ui";
+import { Button, Field, RadioGroup, Radio, Toast } from "vant";
+import "vant/lib/button/style";
+import "vant/lib/field/style";
+import "vant/lib/radio-group/style";
+import "vant/lib/radio/style";
+import imgURL from "./../../assets/imgs/email.png";
+import imgURL2 from "./../../assets/imgs/code.png";
+import imgURL3 from "./../../assets/imgs/eye.png";
+import imgURL4 from "./../../assets/imgs/re-password.png";
+import imgURL5 from "./../../assets/imgs/personal.png";
+const COUNT_NUM = 60;
 export default {
-      components: {
-           Header,
-           Button,
-           Field,
-           RadioGroup, 
-           Radio
-      },
-      data(){
-            return{
-                  imgURL,
-                  imgURL2,
-                  imgURL3,
-                  imgURL4,
-                  imgURL5,
-                  userInfo:{
-                        email:"",
-                        code:"",
-                        password:"",
-                        lastName:"",
-                        firstName:"",
-                        phoneNumber:"",
-                        sex:1
-                  }
-            }
+  components: {
+    Header,
+    Button,
+    Field,
+    RadioGroup,
+    Radio,
+    Toast
+  },
+  data() {
+    return {
+      imgURL,
+      imgURL2,
+      imgURL3,
+      imgURL4,
+      imgURL5,
+      show: true,
+      count: "",
+      timer: null,
+      timerShow: true,
+      userInfo: {
+        email: "",
+        code: "",
+        codeMall: "",
+        password: "",
+        lastName: "",
+        firstName: "",
+        phoneNumber: "",
+        sex: "1"
       }
-}
+    };
+  },
+  created() {},
+  methods: {
+    // 注册提交
+    sumbit() {
+      if (this.userInfo.codeMall === this.userInfo.code) {
+        this.$post(this.$api.register, {
+          username: this.userInfo.email,
+          mailCode: this.userInfo.code,
+          password: this.userInfo.password,
+          first_Name: this.userInfo.firstName,
+          last_Name: this.userInfo.lastName,
+          mobile: this.userInfo.phoneNumber,
+          gender: this.userInfo.sex
+        }).then(res => {
+          if (res.code == 1) {
+            Toast.success("注册成功");
+            this.$router.push({ name: "login" });
+          }
+        });
+      } else {
+        Toast.fail("验证码出错");
+        return false;
+      }
+    },
+    // 验证码获取
+    sendCode() {
+      const emailPro = this.userInfo.email;
+      if (!emailPro) {
+        Toast.fail("邮箱不能为空");
+      } else {
+        this.$post(this.$api.emailCheck, {
+          username: this.userInfo.email
+        }).then(res => {
+          console.log(res);
+          if (res.code == 0) {
+            Toast.fail("邮箱已被注册");
+            this.show = false;
+          } else {
+            this.show = true;
+            console.log(this.show)
+            console.log(this.timer)
+            if (!this.timer) {
+              
+              this.count = COUNT_NUM;
+              this.timerShow = false;
+              this.timer = setInterval(() => {
+                if (this.count > 0 && this.count <= COUNT_NUM) {
+                  this.count--;
+                } else {
+                  this.timerShow = true;
+                  clearInterval(this.timer);
+                  this.timer = null;
+                }
+              }, 1000);
+            }
+            setTimeout(() => {
+              console.log(111)
+              this.$post(this.$api.setCode, {
+                email: this.userInfo.email
+              }).then(res => {
+                console.log(res);
+                console.log(res.mailCode);
+                this.userInfo.codeMall = res.mailCode;
+              });
+            }, 9000);
+          }
+        });
+      }
+    }
+  }
+};
 </script>

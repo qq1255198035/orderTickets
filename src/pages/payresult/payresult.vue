@@ -6,7 +6,7 @@
                   </router-link>
             </Header>
             <div class="payresult-box">
-                  <div class="pay-success" v-if="payResult.code == 0">
+                  <div class="pay-success" v-if="payResult.code == 1">
                         <div class="result-title">
                               <p><Badge size="large" type="success" class="badge"><Icon name="success" size="16px"/></Badge>支付成功</p>
                               <h3>￥{{payResult.price}}</h3>
@@ -15,7 +15,7 @@
                               <mt-cell title="订单编号：" :value="payResult.orderNum"></mt-cell>
                               <mt-cell title="交易金额：" :value="payResult.price"></mt-cell>
                               <mt-cell title="交易方式：" :value="payResult.payment"></mt-cell>
-                              <mt-cell title="手机号码：" :value="payResult.tel | regNumber"></mt-cell>
+                              <!--<mt-cell title="手机号码：" :value="payResult.tel | regNumber"></mt-cell>-->
                               <mt-cell title="交易时间：" :value="payResult.payTime"></mt-cell>
                         </div>
                         <div class="result-menu">
@@ -23,7 +23,7 @@
                               <Button round class="button-2" to="/index">返回首页</Button>
                         </div>
                   </div>
-                  <div class="pay-fail" v-if="payResult.code == 1">
+                  <div class="pay-fail" v-if="payResult.code == 0">
                         <div class="result-title">
                               <p><Badge size="large" type="error" class="badge"><Icon name="cross" size="16px"/></Badge>支付失败</p>
                               <span>失败原因：支付超时或订单异常</span>

@@ -1,0 +1,54 @@
+{
+      "status": 0,
+      "data":{
+            "buyMessage": {
+                  "activities": "有3个彩蛋，分别在片尾字幕前、后、中场分别在片尾字幕前、后、中场有3个彩蛋，",
+                  "preferential": "满400 减100",
+                  "goodsMessage": [
+                        {
+                              "title": "前排贵宾席",
+                              "price": "385",
+                              "content": "团购下单",
+                              "discount": "100"
+                        },
+                        {
+                              "title": "前排贵宾席",
+                              "price": "385",
+                              "content": "团购下单",
+                              "discount": "100"
+                        },
+                        {
+                              "title": "前排贵宾席",
+                              "price": "385",
+                              "content": "团购下单",
+                              "discount": "100"
+                        },
+                        {
+                              "title": "前排贵宾席",
+                              "price": "385",
+                              "content": "团购下单",
+                              "discount": "100"
+                        },
+                        {
+                              "title": "前排贵宾席",
+                              "price": "385",
+                              "content": "团购下单",
+                              "discount": "100"
+                        },
+                        {
+                              "title": "前排贵宾席",
+                              "price": "385",
+                              "content": "团购下单",
+                              "discount": "100"
+                        },
+                        {
+                              "title": "前排贵宾席",
+                              "price": "385",
+                              "content": "团购下单",
+                              "discount": "100"
+                        }
+                  ]
+            }
+
+      }
+}

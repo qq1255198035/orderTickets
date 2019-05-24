@@ -5,14 +5,14 @@
                         <img src="./../../assets/imgs/logo.png" alt="">
                   </div>
                   <div class="input-box">
-                        <Field v-model="userInfo.email"
+                        <Field v-model="email"
                               type="email"
                               :left-icon="imgURL1"
                               placeholder="请输入电子邮箱"
                               class="login-input"
                               :border="false"
                         />
-                        <Field v-model="userInfo.password"
+                        <Field v-model="password"
                               type="password"
                               :left-icon="imgURL"
                               placeholder="请输入登录密码"
@@ -29,7 +29,7 @@
                         
                   </div>
                   <div class="bottom">
-                        <Button round size="large" class="login-button">确定</Button>
+                        <Button round size="large" class="login-button" @click="confirmlogin">确定</Button>
                         <p>还没有账号？<router-link class="router-link" to="/register">立即注册</router-link></p>
                   </div>
             </div>
@@ -112,29 +112,68 @@
 }
 </style>
 <script>
-import { Button,Field,Switch } from 'vant';
+import { Button,Field,Switch,Toast } from 'vant';
 import 'vant/lib/button/style';
 import 'vant/lib/field/style';
 import 'vant/lib/switch/style';
+import 'vant/lib/toast/style';
 import imgURL from './../../assets/imgs/password.png'
 import imgURL1 from './../../assets/imgs/Profile.png'
+
 export default {
       components: {
             Button,
             Field,
             "van-switch":Switch
       },
+      computed:{
+            
+      },
       data(){
             return{
                   imgURL,
                   imgURL1,
                   checked:false,
-                  userInfo:{
-                        email:"",
-                        password:""
-                  }
+                  email:"",
+                  password:""
+                  
             }
            
+      },
+      methods:{
+            confirmlogin(){
+                  if(!this.email){
+                        Toast.fail('请填写用户名');
+                  }else if(!this.password){
+                        Toast.fail('请填写密码');
+                  }else{
+                        this.$post(this.$api.login, {
+                              username: this.email,
+                              password: this.password
+                        }).then(res =>{
+                              console.log(res)
+                              if(res.mes == 0) {
+                                    Toast.fail('用户名不存在');
+                              }
+                              if(res.code == 1){
+                                    Toast.success('登录成功')
+                                    this.$ls.set("token",res.token)
+                                    this.$ls.set("userid",res.userid)
+                                    let redirect = decodeURIComponent(this.$route.query.redirect || '/');
+                                    console.log(redirect)
+                                    this.$router.push({
+                                          path: redirect
+                                    })
+                                    
+                              }
+                        })
+                  }
+                  
+            }
+      },
+      mounted(){
+            
+            
       }
 }
 </script>
