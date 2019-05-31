@@ -20,7 +20,7 @@
       </Cell>
       <Cell class="my-cell preferential">
         <template slot="title">
-          <Tag color="#f8955c">优惠</Tag>
+          <Tag color="#f8955c">{{$t('m.discountTitle')}}</Tag>
           <span class="custom-text">{{coupon.name}}</span>
         </template>
       </Cell>
@@ -41,8 +41,8 @@
             type="warning"
             plain
             size="small"
-            @click="$router.push({ name: 'buy', query: { price: item.retail_price, id: id, goodsId: item.id}})"
-          >购票</Button>
+            @click="$router.push({ name: 'buy', query: { price: item.retail_price, id: id, goodsId: item.id, name:item.name}})"
+          >{{$t('m.buyTitle')}}</Button>
         </Cell>
       </div>
     </div>
@@ -121,7 +121,7 @@ export default {
   },
   data() {
     return {
-      Htitle: "赛事详情",
+      Htitle: "賽事詳情",
       gameDetails: {},
       buyMessage: {},
       coupon: '',
@@ -160,7 +160,7 @@ export default {
       const params = {
         id: this.$route.query.id
       }
-      const _id = this.$ls.get("token");
+      // const _id = this.$ls.get("token");
       this.$post(this.$api.ticket, {
         id: params.id
       }).then(res => {

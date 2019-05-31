@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header title="优惠券" class="header">
+    <Header :title="$t('m.couponTitle')" class="header">
       <router-link to="/myhome" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
@@ -13,22 +13,22 @@
         color="#008e98"
         title-inactive-color="#666"
       >
-        <Tab title="全部优惠券">
+        <Tab :title="$t('m.allCoupons')">
           <div class="mycoupon-box">
-            <coupon1 :data="couponNum"></coupon1>
-            <coupon2></coupon2>
-            <coupon3></coupon3>
+            <!--<coupon1 :data="couponNum"></coupon1>-->
+            <coupon2 :data="couponNumOne"></coupon2>
+            <coupon3 :data="couponNumTwo"></coupon3>
           </div>
         </Tab>
-        <Tab title="未使用">
+        <Tab :title="$t('m.notUsed')">
           <div class="mycoupon-box">
-            <coupon1></coupon1>
-            <coupon2></coupon2>
+            <!--<coupon1 :data="couponNum"></coupon1>-->
+            <coupon2 :data="couponNumOne"></coupon2>
           </div>
         </Tab>
-        <Tab title="已过期">
+        <Tab :title="$t('m.expired')">
           <div class="mycoupon-box">
-            <coupon3></coupon3>
+            <coupon3 :data="couponNumTwo"></coupon3>
           </div>
         </Tab>
       </Tabs>
@@ -62,40 +62,50 @@
 import coupon1 from "./../../components/coupon1";
 import coupon2 from "./../../components/coupon2";
 import coupon3 from "./../../components/coupon3";
-import {Header} from 'mint-ui';
-import { Tab, Tabs } from 'vant';
-import 'vant/lib/tab/style'
-import 'vant/lib/tabs/style'
+import { Header } from "mint-ui";
+import { Tab, Tabs } from "vant";
+import "vant/lib/tab/style";
+import "vant/lib/tabs/style";
 export default {
-    components:{
-        coupon1,
-        coupon2,
-        coupon3,
-        Tab, 
-        Tabs,
-        Header
-    },
-    data(){
-        return{
-            active:"0",
-            couponNum: []
-        }
-    },
-    created() {
-        this._counp()
-    },
-    methods: {
-        _counp() {
-        const params = {
-            id: this.$ls.get("userid")
-        };
-        this.$post(this.$api.coupon + "/" + params.id).then(res => {
-            console.log(res);
-            this.couponNum = res.data;
-            console.log(this.index)
-            
-        });
-        },
+  components: {
+    coupon1,
+    coupon2,
+    coupon3,
+    Tab,
+    Tabs,
+    Header
+  },
+  data() {
+    return {
+      active: "0",
+      couponNum: []
+    };
+  },
+  created() {
+    this._counp();
+  },
+  methods: {
+    _counp() {
+      const params = {
+        id: this.$ls.get("userid")
+      };
+      this.$post(this.$api.coupon + "/" + params.id).then(res => {
+        console.log(res);
+        this.couponNum = res.data;
+      });
     }
-}
+  },
+  computed: {
+    couponNumOne() {
+      return this.couponNum.filter(item => {
+        return item.send_type == 0;
+      });
+    },
+    couponNumTwo() {
+      return this.couponNum.filter(item => {
+        return item.send_type == 2;
+      });
+    }
+  }
+};
 </script>

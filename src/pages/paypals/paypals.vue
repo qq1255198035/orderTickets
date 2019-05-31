@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <Loading size="60px"></Loading>
-        <p>加载中...</p>
+        <p>加載中...</p>
     </div>
 </template>
 

@@ -15,7 +15,7 @@
       <p class="desc-text content" onselectstart="return false" v-html="gameDetails.content"></p>
     </div>
     <div class="stars-content">
-      <h3>参赛明星</h3>
+      <h3>{{$t('m.starTitle')}}</h3>
       <div ref="wrapper1">
         <ul class="content1 stars-box" ref="content1">
           <li v-for="(item,index) in stars" :key="index">
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="buy-btn">
-      <Button round size="large" class="buy-button" @click="goBuy">特惠购票</Button>
+      <Button round size="large" class="buy-button" @click="goBuy">{{$t('m.purchase')}}</Button>
     </div>
   </div>
 </template>
@@ -136,7 +136,7 @@ export default {
   },
   data() {
     return {
-      Htitle: "赛事详情",
+      Htitle: "賽事詳情",
       gameDetails: {},
       stars: [],
       width: "",
@@ -165,6 +165,7 @@ export default {
       const params = {
         id: this.$route.query.id
       };
+      console.log(params.id)
       // 赛事详情
       this.$post(this.$api.activityDetail + "/" + params.id).then(res => {
         console.log(res);

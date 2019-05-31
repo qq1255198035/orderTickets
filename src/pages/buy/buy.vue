@@ -14,7 +14,7 @@
     <div class="buy-details">
       <Cell class="van-cell">
         <template slot="title">
-          <span class="cell-title">前排 贵宾席</span>
+          <span class="cell-title">{{name}}</span>
         </template>
         <div class="buy-message">
           <p>{{calcPrice}}</p>
@@ -42,7 +42,9 @@
           <span class="cell-title"></span>
         </template>
         <div class="total-price">
-          共<span>{{num}}</span>张票<span>小计:</span>
+          共
+          <span>{{num}}</span>张票
+          <span>{{$t('m.subtotal')}}:</span>
           <p>{{calcPrice | fomatMoney}}</p>
         </div>
       </Cell>
@@ -53,13 +55,19 @@
           <span class="cell-title-bottom">不支持退票</span>
         </template>
         <div class="total-price">
-          还需支付
+          {{$t('m.needPay')}}
           <p>{{calcPrice | fomatMoney}}</p>
         </div>
       </Cell>
       <div class="buyBtn-box">
-        <Button round size="large" plain class="get-catecory" @click="addCategory">加入购物车</Button>
-        <Button round size="large" class="go-buy" @click="goTobuy">立即购买</Button>
+        <Button
+          round
+          size="large"
+          plain
+          class="get-catecory"
+          @click="addCategory"
+        >{{$t('m.addCart')}}</Button>
+        <Button round size="large" class="go-buy" @click="goTobuy">{{$t('m.buyNow')}}</Button>
       </div>
     </div>
   </div>
@@ -156,7 +164,6 @@ input {
 </style>
 <script>
 import theme from "./../../components/theme";
-import imgUrl from "./../../assets/imgs/exmple.png";
 import { Button, Cell, Stepper, Toast } from "vant";
 import "vant/lib/cell/style";
 import "vant/lib/cell-group/style";
@@ -174,24 +181,16 @@ export default {
     return {
       num: 1,
       Htitle: "赛事详情",
-      gameDetails: {
-        title: "篮球比赛",
-        desc: "Basketball match",
-        place: "香港",
-        time: "2019-3-24 9:00-15:00",
-        person: "13000",
-        message:
-          "有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场"
-      },
       price: 0,
-      id: ''
+      id: "",
+      name: ""
     };
   },
   created() {
     this.price = this.$route.query.price;
-    this.id = this.$route.query.id
+    this.id = this.$route.query.id;
     this.gameDetails = JSON.parse(this.$ls.get("gameDetails"));
-    console.log(this.$ls.get("userid"))
+    this.name = this.$route.query.name;
   },
   mounted() {},
   computed: {
@@ -201,38 +200,69 @@ export default {
   },
   methods: {
     addCategory() {
-      
       const params = {
         goodsId: this.$route.query.goodsId,
         number: this.num,
         userid: this.$ls.get("userid"),
         price: this.calcPrice
-      }
+      };
       this.$post(this.$api.cartAdd, {
         goodsId: params.goodsId,
         number: params.number,
         userid: params.userid,
         price: params.price
       }).then(res => {
-        console.log(res)
-        if(res.data.code == 1) {
-           Toast.success({
-            message: "添加成功 ，在购物车等亲~",
+        console.log(res);
+        if (res.data.code == 1) {
+          Toast.success({
+            message: "添加成功，在購物車等親~",
             className: "myToast"
           });
-        }else if(res.data.code == 401) {
+        } else if (res.errno == 401) {
           Toast.fail({
-            message: "库存不足",
+            message: "庫存不足",
             className: "myToast"
           });
         }
-       
-      })
-      
+      });
     },
     changeNum() {},
+    //立即购买
     goTobuy() {
-      this.$router.push({ name: "pay", query: { price: this.calcPrice, id: this.id} });
+      const params = {
+        goodsId: this.$route.query.goodsId,
+        number: this.num,
+        userid: this.$ls.get("userid"),
+        price: this.calcPrice
+      };
+      this.$post(this.$api.cartAdd, {
+        goodsId: params.goodsId,
+        number: params.number,
+        userid: params.userid,
+        price: params.price
+      }).then(res => {
+        console.log(res);
+        this.stockDisabled = res.errno;
+        if (res.errno == 401) {
+          Toast.fail({
+            message: "庫存不足",
+            className: "myToast"
+          });
+        } else {
+          const listArr = [];
+          listArr.push({
+            goodsId: this.$route.query.goodsId,
+            nums: this.num,
+            prices: this.calcPrice
+          });
+          this.$ls.set("prices", this.calcPrice);
+          this.$ls.set("allGood", listArr);
+          this.$router.push({
+            name:
+              "pay" /*, query: { price: this.calcPrice, id: this.id, allArry: listArr} */
+          });
+        }
+      });
     }
   },
   filters: {

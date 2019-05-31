@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios';
 import qs from 'qs';
-import {getHref} from '@common/js/com.js'
+// import {getHref} from '@common/js/com.js'
 import { ajaxGet, ajaxPost } from "@/utils/axios";
 import api from "@/api/index";
 import VueStorage from "vue-ls";
@@ -13,6 +13,8 @@ import config from "@/config/settings";
 Vue.use(VueStorage, config.storageOptions);
 import 'mint-ui/lib/style.css'
 import './assets/css/common.css'
+import md5 from 'js-md5'
+Vue.prototype.$md5 = md5
 import FastClick from 'fastclick'
 FastClick.attach(document.body)
 Vue.prototype.$get = ajaxGet;
@@ -70,14 +72,5 @@ new Vue({
   router,
   i18n,
   store,
-  render: h => h(App),
-  created() {
-    this._get()
-  },
-  methods: {
-    _get() {
-      console.log(window.location.href)
-    }
-    
-  }
+  render: h => h(App)
 }).$mount('#app')

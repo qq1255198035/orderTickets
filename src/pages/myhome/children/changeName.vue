@@ -1,6 +1,6 @@
 <template>
       <div class="container">
-            <Header title="更改姓名" class="header">
+            <Header :title="$t('m.changeName')" class="header">
                   <router-link to="/personalData" slot="left">
                         <mt-button icon="back"></mt-button>
                   </router-link>
@@ -9,14 +9,14 @@
                   <div class="cell-box">
                               <Field v-model="userName.lastName"
                                      clearable
-                                     label="姓："
+                                     :label="$t('m.personName')"
                                      class="cell"
                                      ref="input"
                                      :error-message="errorMessage.lastMessage"
                               />
                               <Field v-model="userName.firstName"
                                      clearable
-                                     label="名："
+                                     :label="$t('m.personNameLast')"
                                      class="cell"
                                      :error-message="errorMessage.firstMessage"
                               />
@@ -24,7 +24,7 @@
                         
                   </div>
                   <div class="button-box">
-                        <Button round size="large" class="my-button" @click="commitUserName">确定</Button>
+                        <Button round size="large" class="my-button" @click="commitUserName">{{$t('m.submit')}}</Button>
                   </div>
             </div>
       </div>
@@ -92,6 +92,21 @@ export default {
                   }
                   if(!this.userName.firstName){
                         this.errorMessage.firstMessage = "请填写您的名字"
+                  }
+                  
+                  if(this.userName.lastName && this.userName.firstName){
+                        const params = {
+                              userId: this.$ls.get("userid"),
+                              first_name: this.userName.firstName,
+                              last_name: this.userName.lastName
+                        }
+                        this.$post(this.$api.modifyInfo, params).then(res => {
+                              if(res.data.code == 1) {
+                                    this.$router.push({
+                                          path: '/personalData'
+                                    })
+                              }
+                        })
                   }
                   
 

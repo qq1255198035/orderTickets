@@ -5,16 +5,16 @@
         <span>￥</span>
         {{item.type_money}}
       </p>
-      <p>
-        <span>满{{item.min_amount}}可用</span>
-      </p>
+      <div class="names">
+        <span>{{$t('m.fullTitle')}}{{item.min_amount}}{{$t('m.usable')}}</span>
+      </div>
       <div class="coupon-rule">
         <p>
-          使用期限：
+          {{$t('m.termUse')}}：
           <span>{{item.use_start_date}}</span>~
           <span>{{item.use_end_date}}</span>
         </p>
-        <span>未使用</span>
+        <span>{{$t('m.notUsed')}}</span>
       </div>
     </div>
   </div>
@@ -30,11 +30,18 @@
   align-items: flex-end;
   justify-content: flex-end;
 }
+.names{
+    position: relative;
+    right: 10px;
+    top: -24px;
+    color: #fff
+  }
 .coupon1 > p {
   margin-right: 100px;
+  font-size: 30px;
   margin-bottom: 25px;
-  font-size: 40px;
   color: #fff;
+  margin-bottom: 0
 }
 .coupon1 > p span {
   font-size: 25px;
@@ -53,7 +60,6 @@
     width: 540px;
     height: 210px;
   }
-
   .coupon1 > p {
     margin-right: 165px;
     margin-bottom: 30px;

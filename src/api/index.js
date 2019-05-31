@@ -1,5 +1,6 @@
 //const baseUrl = 'https://rdjx-tech.cn:8443/api/'
 const baseUrl = 'http://192.168.0.122:8080/platform/api/'
+const baseUrl1 = 'http://192.168.0.122:8080/platform/'
 const api = {
   login: baseUrl + "auth/login",
   register: baseUrl + "auth/register",
@@ -36,7 +37,7 @@ const api = {
   // 编辑数量
   delteNum: baseUrl + "cart/update",
   // 个人中心
-  persona: baseUrl + "user/updteUserInfo",
+  persona: baseUrl + "user/listUserInfo",
   //全部订单
   allOrders: baseUrl + "order/list",
   //订单详情
@@ -44,6 +45,14 @@ const api = {
   //取消订单
   changeOrder: baseUrl + "order/cancelOrder",
   //
-  hrefGet: baseUrl + "paypal/payBack"
+  hrefGet: baseUrl + "paypal/payBack",
+  //找回密码
+  getPassword: baseUrl + "auth/findPassword",
+  //券码二维码
+  couponList: baseUrl + "order/getVcode",
+  //修改个人信息
+  modifyInfo: baseUrl + "user/updateUserInfo",
+  //头像图片base64
+  avatarImg: baseUrl + "user/upload"
 };
 export default api

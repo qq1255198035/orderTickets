@@ -1,31 +1,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { pays } from '@common/js/com.js'
+// import { pays } from '@common/js/com.js'
 Vue.use(VueRouter)
 
-import index from "./../pages/index/index";
-import category from "./../pages/category/category";
-import myhome from "./../pages/myhome/index/myhome";
-import order from "./../pages/myhome/children/order";
-import personalData from "./../pages/myhome/children/personalData";
-import userImg from "./../pages/myhome/children/userImg";
-import changeName from "./../pages/myhome/children/changeName";
-import changeNumber from "./../pages/myhome/children/changeNumber";
-import changeSex from "./../pages/myhome/children/changeSex";
-import login from "./../pages/login/login";
-import register from "./../pages/register/register";
-import resetPword from "./../pages/resetPword/resetPword";
-import details1 from "./../pages/details/details1";
-import details2 from "./../pages/details/details2";
-import buy from "./../pages/buy/buy"
-import pay from "./../pages/pay/pay"
-import coupon from "./../pages/coupon/coupon"
-import mycoupon from "./../pages/coupon/mycoupon"
-import orderDetails from "./../pages/orderDetails/orderDetails";
-import payresult from "./../pages/payresult/payresult"
-import paypals from "./../pages/paypals/paypals"
-import payRequst from "./../pages/payPal/payPal"
-import apis from "./../pages/api/api"
+import index from "@pages/index/index";
+import category from "@pages/category/category";
+import myhome from "@pages/myhome/index/myhome";
+import order from "@pages/myhome/children/order";
+import personalData from "@pages/myhome/children/personalData";
+import userImg from "@pages/myhome/children/userImg";
+import changeName from "@pages/myhome/children/changeName";
+import changeNumber from "@pages/myhome/children/changeNumber";
+import changeSex from "@pages/myhome/children/changeSex";
+import login from "@pages/login/login";
+import register from "@pages/register/register";
+import resetPword from "@pages/resetPword/resetPword";
+import details1 from "@pages/details/details1";
+import details2 from "@pages/details/details2";
+import buy from "@pages/buy/buy"
+import pay from "@pages/pay/pay"
+import coupon from "@pages/coupon/coupon"
+import mycoupon from "@pages/coupon/mycoupon"
+import orderDetails from "@pages/orderDetails/orderDetails";
+import payresult from "@pages/payresult/payresult"
+import paypals from "@pages/paypals/paypals"
+import payRequst from "@pages/payPal/payPal"
+import qrCode from "@pages/qrcode/qrcode"
 import { resolve } from 'q';
 
 export default new VueRouter({
@@ -229,6 +229,11 @@ export default new VueRouter({
       path: "/payPal",
       name: "payPal",
       component: payRequst
+    },
+    {
+      path: "/qrcode",
+      name: "qrCode",
+      component: qrCode
     }
   ]
 });

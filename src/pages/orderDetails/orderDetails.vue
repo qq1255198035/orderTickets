@@ -14,46 +14,94 @@
     <div class="order-details wrapper">
       <div class="content">
         <Cell title="详细地址" title-class="details-local"></Cell>
-        <Cell value="香港岛和九龙半岛之间的港口和海域香港龙湾牛头角道77号" value-class="location-msg"></Cell>
+        <Cell :value="gameDetails.location" value-class="location-msg"></Cell>
         <CellGroup class="code-box">
-          <Cell :center="true" v-for="(item,index) in gameDetails.codeMsg" :key="index">
+          <Cell :center="true" v-for="(item,index) in vcodes" :key="index">
             <template slot="title">
               <span class="custom-text">券码{{item.id}}：</span>
-              <span class="custom-text">{{item.name}}</span>
+              <span class="custom-text">{{item.vcode}}</span>
             </template>
-            <Icon
-              slot="right-icon"
-              :name="codeImg"
-              class="custom-icon"
-              @click.stop="ishow = index"
-            />
+            <!--点击-->
+            <Icon slot="right-icon" :name="codeImg" class="custom-icon" @click.stop="ishows(item)"/>
           </Cell>
         </CellGroup>
-        <Cell title="温馨提示" title-class="details-local" class="mt"></Cell>
+        <Cell :title="$t('m.reminder')" title-class="details-local" class="mt"></Cell>
         <Cell :center="true" class="border-none">
           <template slot="title">
-            <span class="custom-text">赛事时间：{{gameDetails.time}}</span>
+            <span class="custom-text">{{$t('m.tournament')}}：{{gameDetails.competition_time}}</span>
           </template>
         </Cell>
       </div>
     </div>
-    <div
-      class="popup-com"
-      v-for="(item,index) in gameDetails.codeMsg"
-      :key="index"
-      @click="ishow = -1"
-    >
-      <popup
-        :imgURL1="item.imgURL1"
-        :imgURL2="item.imgURL2"
-        :name="item.name"
-        v-if="ishow == index"
-      ></popup>
-      <span v-if="ishow == index" @click="ishow = -1">x</span>
+    <!--展示码-->
+    <div >
+      <transition name="fade" >
+        <div class="qrcode-wrapper" @click="isHide" v-show="show">
+          <div class="qrcode">
+            <div class="vcodeTitle">{{$t('m.vcodeNmae')}}:{{vcodeNmae}}</div>
+            <canvas id="canvas"></canvas>
+            <div @click="isHide" class="close-vcode">x</div>
+          </div>
+        </div>
+      </transition>
     </div>
+    <!--<div class="popup-com" v-for="(item,index) in vcodes.vcode" :key="index">
+      <popup :imgURL1="item.imgURL1" :imgURL2="item.imgURL2" :name="item.name" v-model="show"></popup>
+      <span>x</span>
+    </div>-->
   </div>
 </template>
 <style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.6s;
+}
+.fade-enter,
+.fade-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+.qrcode-wrapper {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 99;
+  height: 100%;
+  background: rgba(7, 17, 27, 0.1);
+}
+.qrcode-wrapper .qrcode {
+  position: absolute;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  width: 180px;
+  height: 180px;
+  border-radius: 6px;
+  margin-top: -90px;
+  margin-left: -90px;
+  text-align: center
+}
+#canvas{
+  width: 120px;
+  height: 120px;
+}
+.close-vcode{
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  position: relative;
+  bottom: -40px;
+  left: 50%;
+  margin-left: -15px
+}
+.vcodeTitle{
+  padding: 10px 0;
+  color: #3d3d3d
+}
 .van-overflow-hidden {
   overflow: auto !important;
 }
@@ -131,6 +179,7 @@
 </style>
 <script>
 import QRCode from "qrcode";
+import JsBarcode from "jsbarcode";
 import theme from "./../../components/theme";
 import BScroll from "better-scroll";
 import popup from "./../../components/popup";
@@ -147,74 +196,23 @@ export default {
     Cell,
     CellGroup,
     Icon,
-    popup,
-    QRCode
+    popup
   },
   data() {
     return {
-      ishow: -1,
       codeImg,
       Htitle: "订单详情",
       gameDetails: {
-        title: "篮球比赛",
-        desc: "Basketball match",
-        place: "香港",
-        time: "2019-3-24 9:00-15:00",
-        person: "13000",
-        message:
-          "有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场有3个彩蛋，分别在片尾字幕前、后、中场",
-        codeMsg: [
-          {
-            id: "01",
-            name: "652020005",
-            imgURL1: imgUrl1,
-            imgURL2: imgUrl2,
-            show: false
-          },
-          {
-            id: "02",
-            name: "25200",
-            imgURL1: imgUrl1,
-            imgURL2: imgUrl2,
-            show: false
-          },
-          {
-            id: "03",
-            name: "652020005200",
-            imgURL1: imgUrl1,
-            imgURL2: imgUrl2,
-            show: false
-          },
-          {
-            id: "04",
-            name: "652020005200",
-            imgURL1: imgUrl1,
-            imgURL2: imgUrl2,
-            show: false
-          },
-          {
-            id: "05",
-            name: "652020005200",
-            imgURL1: imgUrl1,
-            imgURL2: imgUrl2,
-            show: false
-          },
-          {
-            id: "06",
-            name: "652020005200",
-            imgURL1: imgUrl1,
-            imgURL2: imgUrl2,
-            show: false
-          },
-          {
-            id: "07",
-            name: "652020005555",
-            imgURL1: imgUrl1,
-            imgURL2: imgUrl2,
-            show: false
-          }
-        ]
-      }
+        avatar: "",
+        location: "",
+        start_time: "",
+        endTime: "",
+        competition_time: "",
+        title: ""
+      },
+      vcodeNmae: "",
+      vcodes: "",
+      show: false
     };
   },
   mounted() {
@@ -232,22 +230,38 @@ export default {
     });
   },
   created() {
-    //this.gameDetails = JSON.parse(this.$ls.get("gameDetails"));
+    this.gameDetails.avatar = this.$ls.get("imgUrl");
+    this.gameDetails.location = this.$ls.get("address");
+    this.gameDetails.start_time = this.$ls.get("startTime");
+    this.gameDetails.endTime = this.$ls.get("endTime");
+    this.gameDetails.competition_time = this.$ls.get("saiTime");
+    this.gameDetails.title = this.$ls.get("tradeName");
+
+    this._orderDetails();
   },
   methods: {
-        ishow() {
-              this.qrcode()
-        },
-    qrcode() {
-      let qrcode = new QRCode("qrcode", {
-        width: 100,
-        height: 100, // 高度
-        text: "56663159" // 二维码内容
-        // render: 'canvas' // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
-        // background: '#f0f'
-        // foreground: '#ff0'
+    _orderDetails() {
+      const params = {
+        goodsId: this.$route.query.id
+      };
+      this.$post(this.$api.couponList, params).then(res => {
+        console.log(res);
+        this.vcodes = res.list;
       });
-      console.log(qrcode);
+    },
+    isHide() {
+      this.show = false
+    },
+    ishows(item) {
+      this.vcodeNmae = item.vcode
+      this.show = true;
+      var canvas = document.getElementById("canvas");
+      console.log(canvas);
+
+      QRCode.toCanvas(canvas, item.vcode, function(error) {
+        if (error) console.error(error);
+        console.log("success!");
+      });
     }
   }
 };

@@ -33,6 +33,7 @@ export default {
       });
     },
     activityDetail(item) {
+      console.log(item)
       this.$router.push({
         name: 'details1',
         query: {

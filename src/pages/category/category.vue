@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <Header title="购物车" class="header">
+    <Header :title="$t('m.shopTitle')" class="header">
       <div slot="right" @click="EditIsShow = !EditIsShow" class="edit">
-        <span v-show="EditIsShow && goods.length > 0">编辑</span>
-        <span v-show="!EditIsShow">完成</span>
+        <span v-show="EditIsShow && goods.length > 0">{{$t('m.editTitle')}}</span>
+        <span v-show="!EditIsShow">{{$t('m.completeTitle')}}</span>
       </div>
     </Header>
     <div
@@ -56,11 +56,11 @@
             v-model="checkIsTrue"
             checked-color="#008e98"
             class="submit-left"
-            @click="checkedAll"
-          >全选</Checkbox>
+            @change="checkedAll"
+          >{{$t('m.checkAll')}}</Checkbox>
           <div class="submit-right">
             <span>
-              合计
+              {{$t('m.totalTitle')}}
               <i>￥{{ money }}</i>
             </span>
             <Button
@@ -71,7 +71,7 @@
               :disabled="!checkedGoods.length"
               @click="Settlement"
             >
-              结算(
+              {{$t('m.settleTitle')}}(
               <span>{{checkedGoods.length}}</span>)
             </Button>
             <Button
@@ -82,7 +82,7 @@
               @click="showMessageBox"
               :disabled="!checkedGoods.length"
             >
-              删除(
+              {{$t('m.delteTitle')}}(
               <span>{{checkedGoods.length}}</span>)
             </Button>
           </div>
@@ -90,7 +90,7 @@
       </div>
       <div class="list-bottom">
         <Loading type="spinner" v-if="this.goods.length < 0"/>
-        <p v-else>暂无更多数据</p>
+        <p v-else>{{$t('m.notListTitle')}}</p>
       </div>
     </div>
 
@@ -247,7 +247,7 @@ input {
   }
   .cardItem {
     margin-left: 30px;
-    padding-bottom: 20px
+    padding-bottom: 20px;
   }
   .submit-right .submitButton {
     font-size: 16px;
@@ -262,9 +262,9 @@ input {
 }
 </style>
 <script>
-import imgUrl from "./../../assets/imgs/goodsImg.png";
+import imgUrl from "@assets/imgs/goodsImg.png";
 import { Header, MessageBox, InfiniteScroll } from "mint-ui";
-import tabbar from "./../../components/tabBar";
+import tabbar from "@comp/tabBar";
 import { Card, Checkbox, CheckboxGroup, Button, Stepper, Loading } from "vant";
 import "vant/lib/card/style";
 import "vant/lib/checkbox/style";
@@ -288,6 +288,7 @@ export default {
     return {
       checkedGoods: [],
       allGood: [],
+      checkIsTrue: false,
       allChecked: false,
       EditIsShow: true,
       showCance: false,
@@ -304,25 +305,27 @@ export default {
   methods: {
     // 跳转传值
     Settlement() {
-      console.log(this.allGood)
+      console.log(this.allGood);
+      this.$ls.set("allGood", this.allGood);
+      this.$ls.set("prices", this.money);
       this.$router.push({
-        path: '/pay',
-        query: {
+        path: "/pay"
+        /*query: {
           allArry: this.allGood,
           price: this.money
-        }
-      })
+        }*/
+      });
     },
     // 删除
     showMessageBox() {
       MessageBox({
         title: "",
-        message: "确认要删除这" + this.checkedGoods.length + "种商品吗?",
+        message: "確認要删除這" + this.checkedGoods.length + "種商品嗎?",
         showCancelButton: true,
         confirmButtonClass: "confirmButton"
       }).then(action => {
         if (action == "confirm") {
-          console.log("确定删除");
+          console.log("確定删除");
           console.log(this._id.split(","));
           this.$post(this.$api.detelCart, {
             id: this._id
@@ -370,12 +373,10 @@ export default {
         this.goods = res.cartList;
       });
     },
-    //全选按钮
-    checkedAll() {},
     // 加减
     changeGoodsNum(item) {
       this.calcPrice();
-      console.log(item)
+      console.log(item);
       var goodsId = item.id;
       var goodNem = item.number;
       /** for (var i = 0; i < this.goods.length; i++) {
@@ -384,7 +385,7 @@ export default {
           goodNem = this.goods[i].number
         }
       }**/
-      console.log(goodsId)
+      console.log(goodsId);
       this.$post(this.$api.delteNum, {
         id: goodsId,
         number: goodNem
@@ -403,18 +404,18 @@ export default {
       for (var i = 0; i < list.length; i++) {
         if (this.checkedGoods.indexOf(i) > -1) {
           listArr.push({
-            goodsId: this.goods[i].id,
+            goodsId: this.goods[i].goods_id,
             prices: this.goods[i].retail_price,
-            nums: this.goods[i].number
-          })
-          console.log(this.allGood)
-          _id += this.goods[i].id + ",";
+            nums: this.goods[i].number,
+            id: this.goods[i].id
+          });
+          _id += this.goods[i].goods_id + ",";
           price += this.goods[i].number * this.goods[i].retail_price;
           numb += this.goods[i].number;
         }
       }
-      this.allGood = listArr
-      console.log(this.allGood)
+      this.allGood = listArr;
+      console.log(this.allGood);
       this._id = _id;
       this.money = price;
       this.$ls.set("price", this.money);
@@ -428,17 +429,21 @@ export default {
     selectGoods(e) {
       console.log(e);
       this.calcPrice();
-      /** var unitPrice = 0;
-      var _total = 0;
-      for (var i = 0; i < this.goods.length; i++) {
-        if (e.indexOf(i) > -1) {
-          this.num = this.goods[i].number;
-          unitPrice = this.goods[i].retail_price;
-          _total += this.num * unitPrice;
+    },
+    //全选按钮
+    checkedAll(event) {
+      const checkArry = []
+      if(this.checkIsTrue) {
+        //this.calcPrice()
+        for(let i = 0; i<this.goods.length; i++) {
+          checkArry.push(i)
         }
+        this.checkedGoods = checkArry
+        console.log(this.checkedGoods)
+      }else {
+        this.checkedGoods = []
       }
-      this.money = _total;/ **/
-    }
+    },
   },
   mounted() {
     this.getCateList();
@@ -446,7 +451,7 @@ export default {
   },
   computed: {
     // 判断全选按钮
-    checkIsTrue: {
+    /*checkIsTrue: {
       get: function() {
         if (this.checkedGoods.length == this.goods.length) {
           return true;
@@ -455,7 +460,14 @@ export default {
         }
         console.log(this.checkedGoods.length, this.goods.length);
       },
-      set: function(newValue) {}
+      set: function(newValue) {
+        
+      }
+    }*/
+  },
+  watch: {
+    $route(to, from) {
+      this.$router.go(0);
     }
   },
   filters: {

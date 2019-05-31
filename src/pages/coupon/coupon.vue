@@ -1,6 +1,6 @@
 <template>
   <div class="contanier">
-    <Header title="优惠券" class="header" :fixed="true">
+    <Header :title="$t('m.couponTitle')" class="header" :fixed="true">
       <mt-button icon="back" slot="left" @click.native="$router.back(-1)"></mt-button>
     </Header>
     <div class="coupon-box">
@@ -14,17 +14,17 @@
                   {{item.type_money}}
                 </p>
                 <p>
-                  <span>满{{item.min_amount}}可用</span>
+                  <span>{{$t('m.fullTitle')}}{{item.min_amount}}{{$t('m.usable')}}</span>
                 </p>
               </div>
 
               <div class="coupon-rule">
                 <p>
-                  使用期限：
+                  {{$t('m.termUse')}}：
                   <span>{{item.use_start_date}}</span>~
                   <span>{{item.use_end_date}}</span>
                 </p>
-                <span v-if="item.send_type == 0">未使用</span>
+                <span v-if="item.send_type == 0">{{$t('m.notUsed')}}</span>
               </div>
             </div>
           </Radio>
@@ -96,7 +96,7 @@
         <Radio name="1">不使用</Radio>
       </RadioGroup>
       <!--<Button round size="small" @click.native="$router.push('/index')" class="coupon-confirm">返回首页</Button>-->
-      <Button round size="small" v-if="show" @click="confirm" class="coupon-confirm">确定</Button>
+      <Button round size="small" v-if="show" @click="confirm" class="coupon-confirm">{{$t('m.submit')}}</Button>
     </div>
   </div>
 </template>
@@ -251,7 +251,8 @@ export default {
       minPrice: "",
       _ids: "",
       show: true,
-      checked: "2"
+      checked: "2",
+      couponId: ""
     };
   },
   created() {
@@ -284,10 +285,11 @@ export default {
       } else {
         this.index = parseInt(this.$route.query._ids);
       }
-      this._price = this.$route.query.price;
+      this._price = this.$ls.get("prices");
       this.minPrice = this.couponNum[this.index].min_amount;
       this.difference = this.couponNum[this.index].type_money;
-
+      this.couponId = this.couponNum[this.index].user_coupon_id
+      this.$ls.set("couponId", this.couponId)
       if (this._price > this.minPrice) {
         console.log("可以使用");
         this.show = true;
@@ -303,7 +305,7 @@ export default {
       }
     },
     confirm() {
-      let resultPrice = this._price - this.difference;
+      let resultPrice =  this.difference;
       console.log(resultPrice);
       if(this.index) {
         resultPrice = null
@@ -311,9 +313,9 @@ export default {
       this.$router.push({
         name: "pay",
         query: {
-          resultPrice: resultPrice,
+          resultPrice: this.$ls.set("resultPrice", resultPrice),
           price: this.$route.query.price,
-          id: this.$ls.get("userid")
+          id: this.$ls.get("userid"),
         }
       });
     }

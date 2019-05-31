@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header title="注册" class="header">
+    <Header :title="$t('m.registerTitle')" class="header">
       <router-link to="/login" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
@@ -9,7 +9,7 @@
       <Field
         v-model="userInfo.email"
         clearable
-        placeholder="输入电子邮箱"
+        :placeholder="$t('m.email')"
         class="cell"
         type="text"
         :left-icon="imgURL"
@@ -17,7 +17,7 @@
       <Field
         v-model="userInfo.code"
         clearable
-        placeholder="输入验证码"
+        :placeholder="$t('m.verCode')"
         class="cell margin10"
         type="number"
         :left-icon="imgURL2"
@@ -29,7 +29,7 @@
           type="primary"
           @click="sendCode"
           class="mybutton"
-        >获取验证码</Button>
+        >{{$t('m.getCode')}}</Button>
         <Button
           slot="button"
           v-show="!timerShow"
@@ -42,7 +42,7 @@
       <Field
         v-model="userInfo.password"
         clearable
-        placeholder="输入登录密码"
+        :placeholder="$t('m.passwrods')"
         class="cell margin10"
         type="password"
         :left-icon="imgURL4"
@@ -52,11 +52,11 @@
         <Field
           v-model="userInfo.firstName"
           clearable
-          placeholder="姓"
+          :placeholder="$t('m.personName')"
           type="text"
           :left-icon="imgURL5"
         ></Field>
-        <Field v-model="userInfo.lastName" clearable placeholder="名" type="text"></Field>
+        <Field v-model="userInfo.lastName" clearable :placeholder="$t('m.personNameLast')" type="text"></Field>
       </div>
       <div class="cell margin10">
         <span class="phone-icon"></span>
@@ -72,21 +72,21 @@
           clearable
           ref="input"
           type="tel"
-          placeholder="输入手机号码"
+          :placeholder="$t('m.phoneTitle')"
         />
       </div>
       <RadioGroup v-model="userInfo.sex" class="selecte-sex margin10">
         <span class="sexImg"></span>
-        <Radio name="1" checked-color="#008e98" class="sex-radio">男</Radio>
-        <Radio name="2" checked-color="#008e98" class="sex-radio">女</Radio>
+        <Radio name="1" checked-color="#008e98" class="sex-radio">{{$t('m.sexBoy')}}</Radio>
+        <Radio name="2" checked-color="#008e98" class="sex-radio">{{$t('m.sexGril')}}</Radio>
       </RadioGroup>
       <p class="login-btn">
-        已有账号
-        <router-link to="/login" class="login-rn">立即登录</router-link>
+        {{$t('m.accounts')}}
+        <router-link to="/login" class="login-rn">{{$t('m.loginTitle')}}</router-link>
       </p>
       <div class="bottom">
-        <Button round size="large" v-show="show" @click="sumbit" class="login-button">注册</Button>
-        <Button round size="large" v-show="!show" disabled class="login-button">注册</Button>
+        <Button round size="large" v-show="show" @click="sumbit" class="login-button">{{$t('m.registerTitle')}}</Button>
+        <Button round size="large" v-show="!show" disabled class="login-button">{{$t('m.registerTitle')}}</Button>
       </div>
     </div>
   </div>
@@ -216,7 +216,7 @@ export default {
           }
         });
       } else {
-        Toast.fail("验证码出错");
+        Toast.fail("驗證碼出錯");
         return false;
       }
     },
@@ -224,19 +224,16 @@ export default {
     sendCode() {
       const emailPro = this.userInfo.email;
       if (!emailPro) {
-        Toast.fail("邮箱不能为空");
+        Toast.fail("郵箱不能為空");
       } else {
         this.$post(this.$api.emailCheck, {
           username: this.userInfo.email
         }).then(res => {
-          console.log(res);
           if (res.code == 0) {
-            Toast.fail("邮箱已被注册");
+            Toast.fail("郵箱已被注册");
             this.show = false;
           } else {
             this.show = true;
-            console.log(this.show)
-            console.log(this.timer)
             if (!this.timer) {
               
               this.count = COUNT_NUM;
@@ -252,12 +249,9 @@ export default {
               }, 1000);
             }
             setTimeout(() => {
-              console.log(111)
               this.$post(this.$api.setCode, {
                 email: this.userInfo.email
               }).then(res => {
-                console.log(res);
-                console.log(res.mailCode);
                 this.userInfo.codeMall = res.mailCode;
               });
             }, 9000);
