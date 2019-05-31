@@ -37,11 +37,19 @@ router.beforeEach((to, from, next) => {
 });
 //axios 配置
 //axios.defaults.timeout = 5000;
+
 axios.defaults.baseURL = "http://localhost:8080/";
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded;charset=UTF-8";
 axios.interceptors.request.use((config) => {
   if (config.method === 'post') {
-    config.data = qs.stringify(config.data);
+    if (Object.prototype.toString.call(config.data) === "[object FormData]") {
+      
+    } else {
+      config.data = qs.stringify(config.data);
+      //console.log(22);
+    }
+    
+    
   }
   return config;
 }, (error) => {

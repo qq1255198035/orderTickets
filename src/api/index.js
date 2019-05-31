@@ -1,5 +1,5 @@
 //const baseUrl = 'https://rdjx-tech.cn:8443/api/'
-const baseUrl = 'http://192.168.0.122:8080/platform/api/'
+const baseUrl = 'http://192.168.0.114:8080/platform/api/'
 const baseUrl1 = 'http://192.168.0.122:8080/platform/'
 const api = {
   login: baseUrl + "auth/login",

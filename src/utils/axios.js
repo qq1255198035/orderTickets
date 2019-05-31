@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export function ajaxPost(url, params) {
+export function ajaxPost(url, params,config) {
       return new Promise((resolve, reject) => {
-            axios.post(url, params)
+            axios.post(url, params, config)
                   .then(response => {
                         resolve(response.data);
                   }, err => {

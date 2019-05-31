@@ -10,21 +10,16 @@
         <Uploader
           result-type="dataUrl"
           :after-read="onRead"
-          accept="image/png, image/jpeg"
+          :accept="'image/png, image/jpeg'"
           class="uploader"
         >
           <img src="./../../../assets/imgs/camera.png" alt>
         </Uploader>
         <div class="item">
-          <img :src="imgUrl" alt @click="getImgUrl">
-          <Badge size="small" type="success" class="badge" v-show="badgeShow">
-            <Icon name="success" size="16px"/>
-          </Badge>
+          <img :src="imgUrl" v-if="imgShow"/>
         </div>
       </div>
-      <div class="button-box">
-        <Button round size="large" class="my-button" @click="postImgUrl">{{$t('m.submit')}}</Button>
-      </div>
+      
     </div>
   </div>
 </template>
@@ -93,6 +88,7 @@
 </style>
 <script>
 import axios from "axios";
+import qs from 'qs'
 import { Uploader, Button, Icon, Toast } from "vant";
 import { Header, Badge } from "mint-ui";
 import "vant/lib/uploader/style";
@@ -110,68 +106,44 @@ export default {
   },
   data() {
     return {
-      imgUrl: [],
-      postImgURL: "",
-      badgeShow: false,
-      opation: ""
+      imgUrl: ''
     };
   },
-
+  computed:{
+    imgShow(){
+      if(this.imgUrl){
+        return true
+      }else{
+        return false
+      }
+    }
+  },
   methods: {
     onRead(file) {
-      this.opation = file.file
       let params = {
         data: file.content
       }
       var formData = new FormData();
-      console.log(file.file)
+      //console.log(file)
       formData.append('file',file.file);
-      console.log(file)
-      let data = formData;
-      let datas =  window.URL.createObjectURL(file.file)
-      console.log(datas);
-      let url = "/api/platform/api/user/upload";
-      //let url = this.$api.avatarImg
-      axios
-        .post(url, datas, {
-          headers: {
-            'Content-Type':'multipart/form-data',
-            //'Content-Type': 'application/json;charset=UTF-8',
-            //'Content-Type': 'text/plain',
-            //'content-type': 'application/x-www-form-urlencoded'
-          }
-        })
+     // console.log(formData.get('file'));
+      this.$post(this.$api.avatarImg, formData,{headers:{'Content-Type':'multipart/form-data'}})
         .then(res => {
-          console.log(res);
+          //console.log(res);
+          this.imgUrl = res.link;
+          this.getImgUrl();
         });
-
-      this.imgUrl = file.content;
+        
     },
-    postImgUrl() {
-      const params = {
-        userId: this.$ls.get("userid"),
-        avatar: this.opation
-      };
-      //const data = JSON.stringify(params)
-      console.log(params);
-      if (!this.badgeShow) {
-        Toast("您還沒有選擇任何圖片");
-      } else {
-        console.log("已添加圖片");
-        this.$post(this.$api.modifyInfo, params).then(res => {
-          console.log(res);
-        });
-
-        //TODO向服务器提交图片url
-      }
-    },  
-    getImgUrl(event) {
-      this.badgeShow = !this.badgeShow;
-      if (this.badgeShow) {
-        this.postImgURL = event.target.src;
-      } else {
-        this.postImgURL = "";
-      }
+    
+    getImgUrl(){
+      this.$post(this.$api.modifyInfo,{avatar:this.imgUrl,userId: this.$ls.get('userid')}).then(res=>{
+        //console.log(res)
+        if(res.errno == 0){
+          Toast.success("上传成功 ！");
+          this.$router.push({name: 'personalData'})
+        }
+      })
     }
   }
 };
